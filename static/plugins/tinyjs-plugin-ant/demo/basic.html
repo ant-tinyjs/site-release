@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Tiny.Physics.Ant</title>
+  <meta charset="utf-8">
+  <script src="https://gw.alipayobjects.com/as/g/tiny/tiny/1.1.5/tiny.js"></script>
+  <script src="../dist/index.debug.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style type="text/css">
+    body,
+    html,
+    canvas {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="J-canvas" class="canvas">
+    Your have to update your browser.
+  </canvas>
+
+  <script>
+    const canvas = document.getElementById('J-canvas');
+    console.log(canvas.style.width, canvas.style.height);
+    const config = {
+      showFPS: true,
+      canvasId: 'J-canvas',
+      width: 320,
+      height: 568,
+      fixSize: true,
+      renderOptions: {
+        backgroundColor: 0x2a3145,
+      },
+    };
+
+    var app = new Tiny.Application(config);
+
+    // 启用ant物理系统
+    Tiny.Physics.Ant.startSystem(app, {
+      gravity: [0, 9.82],// 重力
+      debug: { // 调试信息
+        lineWidth: 1,
+        alpha: 1,
+        fill: false,
+        fillColor: 0xff0000,
+        lineColor: 0x0000ff,
+      }
+    });
+
+    var physics = app.physics.ant;
+
+    //  设置回弹系数 增加小人落到地上的回跳效果
+    physics.restitution = 1;
+
+    // physics.gravity.x = 200;
+    physics.gravity.y = 100;
+
+    function setTitle(title, container) {
+      var title = new Tiny.Text(title, {
+        fontSize: '18px',
+        fill: 'white',
+      });
+
+      title.position.set(Tiny.WIN_SIZE.width / 2, 30);
+      title.anchor.set(0.5, 0);
+      container.addChild(title);
+    }
+
+    function createBox(app, width, height, color) {
+      let graphics = new Tiny.Graphics();
+      graphics.beginFill(color);
+      graphics.drawRect(0, 0, width, height);
+      graphics.bounds = new Tiny.Rectangle(0, 0, width, height);
+      var rt = Tiny.RenderTexture.create(width, height);
+      app.renderer.render(graphics, rt);
+      let sprite = new Tiny.Sprite(rt);
+      return sprite;
+    }
+
+    function createCircle(app, radius, color) {
+      let graphics = new Tiny.Graphics();
+      graphics.beginFill(color);
+      graphics.drawCircle(radius, radius, radius);
+      graphics.bounds = new Tiny.Rectangle(0, 0, radius * 2, radius * 2);
+      var rt = Tiny.RenderTexture.create(radius * 2, radius * 2);
+      app.renderer.render(graphics, rt);
+      let sprite = new Tiny.Sprite(rt);
+      return sprite;
+    }
+
+    var sprites = [];
+
+    function init() {
+
+      container = new Tiny.Container();
+
+      setTitle('点击大方框 切换body状态', container);
+
+      var looptimes = 50;
+
+      function getColor() {
+        return 0x1000000 + Math.random() * 0x1000000;
+      }
+
+      sprite2 = createBox(app, 100, 50, 0xffffff);
+      sprite2.position.x = 100;
+      sprite2.position.y = 400;
+      sprite2.name = 'staticBox';
+      app.physics.ant.enable(sprite2, true);
+
+      sprite2.body.static = true;
+      sprite2.body.mass = 4;
+
+      container.addChild(sprite2);
+      app.run(container);
+
+      sprite2.setEventEnabled(true);
+      sprite2.mousedown = sprite2.touchstart = function (data) {
+        sprite2.body.enable = !sprite2.body.enable;
+      };
+
+      var looptimes = 20;
+
+      var timer = setInterval(function () {
+        var sprite = createCircle(app, 20, getColor());
+        sprite.position.x = 100 + Math.floor(Math.random() * 100);
+        // sprite.position.x = 80;
+        sprite.position.y = 100;
+        sprite.name = 'sprite' + looptimes;
+        app.physics.ant.enable(sprite, true);
+
+        // sprite.body.bounce.y = 0.95;
+        // sprite.body.bounce.x = 0.95;
+        sprite.body.velocity.set(100, 0);
+        sprite.body.mass = 1;
+        sprite.body.collideWorldBounds = true;
+
+        sprite.body.on('shapeChanged', function (a) {
+          console.log('shapeChanged', a)
+        });
+
+        sprite.body.setCircle(20);
+
+        sprite.body.on(Tiny.Physics.Ant.EVENTS.ON_COLLIDE, function (a, b) {
+          // console.log('sprite', a.name, b.name);
+        });
+
+        sprite.body.on(Tiny.Physics.Ant.EVENTS.ON_WORLD_BOUNDS, function () {
+          console.log('worldBounds');
+        });
+
+        sprite.body.on(Tiny.Physics.Ant.EVENTS.ON_OVER_LAP, function () {
+          console.log('overlap');
+        });
+
+        // 系统做了优化 重复添加会自动过滤
+        sprite.body.addCollides([sprite2]);
+        sprite.body.addCollides(sprites);
+
+        container.addChild(sprite);
+
+        sprites.push(sprite);
+
+        if (--looptimes <= 0) {
+          clearInterval(timer);
+        }
+      }, 100);
+
+      // 新版本做了适配 对stage 的scale做了调整 所以这里debug层处理一下
+      app.stageDebugLayer && app.stageDebugLayer.setScale(app.stage.scale.x, app.stage.scale.y);
+    }
+
+    init();
+  </script>
+</body>
+
+</html>

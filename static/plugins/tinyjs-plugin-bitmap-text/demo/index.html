@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>tinyjs-plugin-bitmap-text DEMO</title>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="yes" name="apple-touch-fullscreen"/>
+<meta content="telephone=no,email=no" name="format-detection"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+<style>
+html, body, p, div {margin:0;padding:0;}
+</style>
+</head>
+<body>
+
+<script src="https://gw.alipayobjects.com/as/g/tiny/tiny/1.2.0/tiny.js"></script>
+<script src="../dist/index.debug.js"></script>
+
+<script type="text/javascript">
+  var app = new Tiny.Application({
+    width: 400,
+    height: 400,
+    fixSize: true,
+    renderOptions: {
+      backgroundColor: 0x2a3145,
+    },
+  });
+  var loader = new Tiny.loaders.Loader();
+  loader.add([{
+    name: 's_font_fnt',
+    url: 'https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/bitmaptext/FontEng.xml',
+  }]).load(function () {
+    var fontText = new Tiny.BitmapText('fnt fonts are supported!\ncreated by \n"Tiny.BitmapText()\n1234567890"', {
+      font: '32px Impact',
+      tint: '0xff6600',
+    });
+
+    fontText.setPosition(30, 30);
+    app.run(fontText);
+  });
+</script>
+</body>
+</html>
