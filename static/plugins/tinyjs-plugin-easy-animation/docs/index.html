@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="EasyAnimation.html">EasyAnimation</a></li></ul><h3>Externals</h3><ul><li><a href="external-Tiny.html">Tiny</a></li></ul><h3>Global</h3><ul><li><a href="global.html#clear%25E6%25B8%2585%25E7%2590%2586%25E6%2589%2580%25E6%259C%2589%25E7%259A%2584%25E5%258A%25A8%25E7%2594%25BB%25E7%25BC%2593%25E5%25AD%2598%25E5%258F%258A%25E9%2585%258D%25E7%25BD%25AE">clear 清理所有的动画缓存及配置</a></li><li><a href="global.html#play%25E6%2592%25AD%25E6%2594%25BE%25E5%258A%25A8%25E7%2594%25BB">play 播放动画</a></li><li><a href="global.html#setAnimationConfig%25E8%25AE%25BE%25E7%25BD%25AE%25E5%258A%25A8%25E7%2594%25BB%25E9%2585%258D%25E7%25BD%25AE">setAnimationConfig 设置动画配置</a></li><li><a href="global.html#stop%25E5%2581%259C%25E6%25AD%25A2%25E5%258A%25A8%25E7%2594%25BB">stop 停止动画</a></li></ul>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h1>tinyjs-plugin-easy-animation</h1><blockquote>
+<p>a easy way to use tiny tween animation</p>
+</blockquote>
+<h2>引用方法</h2><ul>
+<li><p>推荐作为依赖使用</p>
+<ul>
+<li><code>npm install tinyjs-plugin-easy-animation --save</code></li>
+</ul>
+</li>
+<li><p>也可以直接引用线上cdn地址，注意要使用最新的版本号，例如：</p>
+<ul>
+<li>https://gw.alipayobjects.com/os/lib/tinyjs-plugin-easy-animation/{version}/index.min.js</li>
+<li>https://gw.alipayobjects.com/os/lib/tinyjs-plugin-easy-animation/{version}/index.debug.js</li>
+</ul>
+</li>
+</ul>
+<h2>起步</h2><p>首先当然是要引入，推荐<code>NPM</code>方式，当然你也可以使用<code>CDN</code>或下载独立版本，先从几个例子入手吧！</p>
+<p>引用 Tiny.js 源码</p>
+<pre class="prettyprint source lang-html"><code>&lt;script src=&quot;https://gw.alipayobjects.com/os/lib/tinyjs/tiny/1.5.0/tiny.js&quot;>&lt;/script></code></pre><pre class="prettyprint source lang-js"><code>require('tinyjs-plugin-easy-animation');
+// 或者
+// import 'tinyjs-plugin-easy-animation';</code></pre><p>1、最简单的例子</p>
+<pre class="prettyprint source lang-js"><code>  // 新建 App
+  var app = new Tiny.Application({
+    width: 320,
+    height: 320,
+    fixSize: true,
+  });
+
+  var container = new Tiny.Container();
+  app.run(container);
+
+  var sprite = Tiny.Sprite.fromImage('https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/logo.png');
+  container.addChild(sprite);
+  sprite.setAnchor(0.5, 0.5);
+  sprite.setPosition(Tiny.WIN_SIZE.width / 2, Tiny.WIN_SIZE.height / 2);
+  sprite.plugins[ 'easyAnimation' ].setAnimationConfig({
+    popup: [
+      {
+        property: 'scale.x',
+        easeFunction: 'Linear.None',
+        clips: [
+          { startTime: 0, value: 1 },
+          { startTime: 1000, value: 0 },
+          { startTime: 2000, value: 1 },
+        ],
+      },
+      {
+        property: 'scale.y',
+        easeFunction: 'Linear.None',
+        clips: [
+          { startTime: 0, value: 1 },
+          { startTime: 1000, value: 0 },
+          { startTime: 2000, value: 1 },
+        ],
+      },
+      {
+        property: 'alpha',
+        easeFunction: 'Linear.None',
+        clips: [
+          { startTime: 0, value: 1 },
+          { startTime: 1000, value: 0 },
+          { startTime: 3000, value: 1 },
+        ],
+      },
+    ],
+    fadeInOut: [
+      {
+        property: 'alpha',
+        easeFunction: 'Linear.None',
+        duration: 3000,
+        clips: [
+          { percent: '0%', value: 1 },
+          { percent: '50%', value: 0 },
+          { percent: '100%', value: 1 },
+        ],
+      },
+    ]
+  });
+  sprite.plugins[ 'easyAnimation' ].play('popup');
+  sprite.on('onAnimationClipEnd', (data) => {
+    console.log(data);
+  });
+  sprite.on('onAnimationEnd', (animationName) => {
+    if (animationName === 'popup') {
+      sprite.plugins[ 'easyAnimation' ].play('fadeInOut');
+    }
+  });</code></pre><p>配置文件规范</p>
+<pre class="prettyprint source lang-js"><code>Object(config)(
+  animationName(动画名称): Array {
+    // 属性参考：http://tinyjs.net/api/tiny.displayobject.html
+    property(动画属性): String,
+    // 缓动参考：https://sole.github.io/tween.js/examples/03_graphs.html
+    // 未配置则默认使用 Linear.None
+    easeFunction(动画缓动): String,
+    // clips使用 startTime 模式时，可不填
+    duration(动画时长): Number,
+    // percent 模式和 startTime 模式 2选1，如同时存在优先使用 startTime。
+    // percent 模式必填 duration
+    clips(动画片段): Array {
+      // 缓动参考：https://sole.github.io/tween.js/examples/03_graphs.html
+      // 优先使用动画片段缓动公式，如未配置则默认使用整个动画的缓动公式。
+      easeFunction(动画缓动): String,
+      // 例如：'30%'
+      percent(动画时间线进度百分比): String,
+      // （毫秒） 例如：2000
+      startTime(动画片段开始时间): Number,
+      value(动画属性值): Number
+    }
+  }
+)
+var config = {
+    popup: [
+      {
+        property: 'scale.x',
+        easeFunction: 'Linear.None',
+        clips: [
+          { startTime: 0, value: 1 },
+          { startTime: 1000, value: 0 },
+          { startTime: 2000, value: 1 },
+        ],
+      },
+      {
+        property: 'scale.y',
+        easeFunction: 'Linear.None',
+        clips: [
+          { startTime: 0, value: 1 },
+          { startTime: 1000, value: 0 },
+          { startTime: 2000, value: 1 },
+        ],
+      },
+      {
+        property: 'alpha',
+        easeFunction: 'Linear.None',
+        clips: [
+          { startTime: 0, value: 1 },
+          { startTime: 1000, value: 0 },
+          { startTime: 3000, value: 1 },
+        ],
+      },
+    ],
+    fadeInOut: [
+      {
+        property: 'alpha',
+        easeFunction: 'Linear.None',
+        duration: 3000,
+        clips: [
+          { percent: '0%', value: 1 },
+          { percent: '50%', value: 0 },
+          { percent: '100%', value: 1 },
+        ],
+      },
+    ]
+  }</code></pre><p>方法</p>
+<pre class="prettyprint source lang-js"><code>    /**
+    * @method setAnimationConfig 设置动画配置
+    * @for EasyAnimation
+    * @param {Object} config 动画描述文件
+    * @param {Boolean} useRelativePositionValue 使用相对位置计算位移
+    */
+    EasyAnimation.prototype.setAnimationConfig(config, useRelativePositionValue);
+
+    /**
+    * @method play 播放动画
+    * @param {String} animationName 播放的动画名称（配置文件中定义）
+    * @param {Number} playTimes 当前动画播放的次数
+    * @param {String}[animationFillMode='forwards'] animationFillMode 类似 css3 animation-fill-mode ，目前支持 forwards 和 backwards。详见 https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-fill-mode
+    */
+    EasyAnimation.prototype.play(animationName, playTimes, animationFillMode);
+
+    /**
+    * @method stop 停止动画
+    */
+    EasyAnimation.prototype.stop();
+
+    /**
+    * @method clear 清理所有的动画缓存及配置
+    */
+    EasyAnimation.prototype.clear();</code></pre><p>事件</p>
+<pre class="prettyprint source lang-js"><code>// easy-animation 会在动画片段播完和整体动画播完，在对应的 DisplayObject emit 两个事件。
+
+// onAnimationClipEnd 在每个 clips 结束后都会 emit 对应的事件。
+DisplayObject.on('onAnimationClipEnd', data => {
+  // data 数据是对应的 property 结束的键值对；
+  // {scale.x: 0.4}
+  console.log(data);
+});
+
+// onAnimationEnd 某个动画完整结束后回调，playTimes 多次会等到全部播放完成触发。
+DisplayObject.on('onAnimationEnd', animationName => {
+  // animationName 对应的是 config 中定义的动画名称
+  // popup
+  console.log(animationName);
+});
+</code></pre><h2>依赖</h2><ul>
+<li><code>Tiny.js</code>: <a href="http://tinyjs.net/api">Link</a></li>
+</ul></article>
+    </section>
+
+
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        index.js
+        </h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>zhaizheng.zz</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+    <dt class="tag-license">License:</dt>
+    <dd class="tag-license"><ul class="dummy"><li>MIT</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+        
+            <div class="description">a easy way to use tiny tween animation</div>
+        
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jul 27 2021 16:11:28 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

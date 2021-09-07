@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TiledText.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Tiny.ui.Alert.html">Alert</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Alert.html#alert">alert</a></li></ul></li><li><a href="Tiny.ui.Button.html">Button</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Button.html#updatePosition">updatePosition</a></li></ul></li><li><a href="Tiny.ui.DOM.html">DOM</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.DOM.html#updateHTML">updateHTML</a></li></ul></li><li><a href="Tiny.ui.ImageNumber.html">ImageNumber</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.ImageNumber.html#create">create</a></li><li data-type='method'><a href="Tiny.ui.ImageNumber.html#update">update</a></li></ul></li><li><a href="Tiny.ui.InlineItems.html">InlineItems</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.InlineItems.html#deleteItem">deleteItem</a></li><li data-type='method'><a href="Tiny.ui.InlineItems.html#layout">layout</a></li><li data-type='method'><a href="Tiny.ui.InlineItems.html#spliceItems">spliceItems</a></li></ul></li><li><a href="Tiny.ui.InputBase.html">InputBase</a></li><li><a href="Tiny.ui.Label.html">Label</a></li><li><a href="Tiny.ui.NinePatch.html">NinePatch</a></li><li><a href="Tiny.ui.TiledText.html">TiledText</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.TiledText.html#create">create</a></li></ul></li><li><a href="Tiny.ui.Toast.html">Toast</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Toast.html#show">show</a></li></ul></li><li><a href="Tiny.ui.UIBase.html">UIBase</a></li><li><a href="TIny.ui.UISettings.html">UISettings</a></li></ul><h3>Externals</h3><ul><li><a href="external-Tiny.html">Tiny</a></li></ul><h3>Namespaces</h3><ul><li><a href="Tiny.ui.html">ui</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">TiledText.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * TiledText 组件
+ *
+ * @description
+ * 使用一个离屏 Canvas 绘制所有的相同样式、单行的文字，相对来说更省内存，对小程序的文本更友好
+ *
+ * @example
+ * const tiledText = new Tiny.ui.TiledText(container, {
+ *   fontSize: 32,
+ *   fontFamily: 'Arial',
+ *   fill: '#ffffff',
+ * });
+ *
+ * const txt = tiledText.create('你好，世界');
+ * const txt2 = tiledText.create('你好，人类');
+ *
+ * container.addChild(txt, txt2);
+ *
+ * @example
+ * // 文字的更新
+ * txt.updateText(`当前时间：${new Date().getTime()}`);
+ *
+ * @class
+ * @memberof Tiny.ui
+ */
+class TiledText {
+  /**
+   *
+   * @param {Tiny.Container} container
+   * @param {object|Tiny.TextStyle} [style]
+   * @param {HTMLCanvasElement} [canvas]
+   * @param {number} [num=30] - 默认行数，可认为是单个 TiledText 示例允许创建的最大值
+   */
+  constructor(container, style, canvas, num = 30) {
+    this.texts = Array.apply(null, Array(num)).map(() => ' ');
+    this.container = container;
+
+    this.length = num;
+    this.count = 0;
+    this.sprites = [];
+
+    this.textInstance = new Tiny.Text(this.texts.join('\n'), style, canvas);
+    this.textInstance.setPositionX(Tiny.WIN_SIZE.width);
+    this.textInstance.renderable = false;
+
+    container.addChild(this.textInstance);
+  }
+
+  /**
+   * 创建 TiledText 的 UI 对象
+   *
+   * @param {string} text
+   * @return {Tiny.Sprite}
+   */
+  create(text) {
+    const { count, length } = this;
+
+    if (count > length) {
+      throw new RangeError(`你创建的个数已超过预设值：${length}`);
+    }
+
+    this.count++;
+    this.texts[count] = text;
+
+    const texture = this._generateTexture(text, count);
+    const sprite = new Tiny.Sprite(texture);
+
+    this.sprites.push(sprite);
+    this._update();
+
+    sprite.textIndex = count;
+    sprite.updateText = (text) => {
+      this._updateText(text, sprite);
+      this._update();
+    };
+
+    return sprite;
+  }
+
+  _update() {
+    this.sprites.forEach(sprite => {
+      sprite.texture._updateUvs();
+    });
+  }
+
+  _generateTexture(text, count) {
+    const { length, textInstance } = this;
+
+    textInstance.text = this.texts.join('\n');
+
+    const { baseTexture } = textInstance.texture;
+    const { width, height } = textInstance;
+    const lineHeight = height / length;
+    const y = lineHeight * count;
+    const texture = new Tiny.Texture(baseTexture, new Tiny.Rectangle(0, y, width, lineHeight));
+
+    return texture;
+  }
+
+  _updateText(text, sprite) {
+    const { textIndex } = sprite;
+
+    this.texts[textIndex] = text;
+
+    const newTexture = this._generateTexture(text, textIndex);
+
+    sprite.texture = newTexture;
+  }
+}
+
+export default TiledText;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jul 27 2021 16:05:17 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

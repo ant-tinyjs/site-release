@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>tinyjs-plugin-dust DEMO</title>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="yes" name="apple-touch-fullscreen"/>
+<meta content="telephone=no,email=no" name="format-detection"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+<style>
+html, body, p, div {margin:0;padding:0;}
+</style>
+</head>
+<body>
+
+<script src="https://gw.alipayobjects.com/os/lib/tinyjs/tiny/1.5.0/tiny.js"></script>
+<script src="../index.debug.js"></script>
+
+<script type="text/javascript">
+  // 新建 App
+  var app = new Tiny.Application({
+    width: 320,
+    height: 320,
+    fixSize: true,
+  });
+
+  var dust;
+  var container = new Tiny.Container();
+  app.run(container);
+  app.onUpdate(function () {
+    dust && dust.update();
+  });
+
+  var text = new Tiny.Text('touch the screen', {
+    font: "12px Arial",
+    fill: 'white',
+    wordWrap: true,
+    wordWrapWidth: Tiny.WIN_SIZE.width - 40
+  });
+  text.setPosition(20, 20);
+  container.addChild(text);
+
+  container.setEventEnabled(true);
+  container.hitArea = new Tiny.Rectangle(0, 30, Tiny.WIN_SIZE.width, Tiny.WIN_SIZE.height - 30);
+  container.on('pointerdown', function (data) {
+    console.log(data);
+    data.stopPropagation();
+    var newPos = data.data.getLocalPosition(this.parent);
+    if (newPos.x && newPos.y) {
+      createDust(newPos.x, newPos.y);
+    }
+  });
+
+  function createDust (x, y) {
+    dust = new Tiny.Dust(x, y, function () {
+        return Tiny.Sprite.fromImage('https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/heart.png')
+      }, container,
+      {
+        number: 50,
+        gravity: 0.1,
+        randomSpacing: true,
+        minAngle: 0, maxAngle: 6.28,
+        minSize: 12, maxSize: 24,
+        minSpeed: 1, maxSpeed: 2,
+        minScaleSpeed: 0.005, maxScaleSpeed: 0.01,
+        minAlphaSpeed: 0.005, maxAlphaSpeed: 0.01,
+        minRotationSpeed: 0.05, maxRotationSpeed: 0.1
+      });
+
+    return dust;
+  }
+</script>
+</body>
+</html>

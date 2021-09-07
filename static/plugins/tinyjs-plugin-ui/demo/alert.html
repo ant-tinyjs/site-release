@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>alert</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+<script src="https://gw.alipayobjects.com/os/lib/tinyjs/tiny/1.4.0/tiny.js"></script>
+<script src="../index.debug.js"></script>
+<script>
+  // 新建 App
+  var app = new Tiny.Application({
+    width: 400,
+    height: 400,
+    fixSize: true,
+    dpi: 2
+  });
+  var container = new Tiny.Container();
+  app.run(container);
+  var tinyAlert = new Tiny.ui.Alert(app, '点我');
+  tinyAlert.alert('11111', function() {
+    tinyAlert.alert('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', function() {
+      alert('没了哦~');
+    });
+  });
+</script>
+</body>
+</html>

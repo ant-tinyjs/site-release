@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BodyDebug.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Tiny.Physics.Ant.Body.html">Body</a><ul class='methods'><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#accelerateTo">accelerateTo</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#addCollides">addCollides</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#addOverlaps">addOverlaps</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#addToWorld">addToWorld</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#destroy">destroy</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#dispatch">dispatch</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#hitTest">hitTest</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#moveTo">moveTo</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#removeAllCollides">removeAllCollides</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#removeAllOverlaps">removeAllOverlaps</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#removeCollides">removeCollides</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#removeFromWorld">removeFromWorld</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#removeOverlaps">removeOverlaps</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#reset">reset</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#setCircle">setCircle</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#setRectangle">setRectangle</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#setSize">setSize</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Body.html#updateBounds">updateBounds</a></li></ul></li><li><a href="Tiny.Physics.Ant.Math.html">Math</a><ul class='methods'><li data-type='method'><a href="Tiny.Physics.Ant.Math.html#.angle">angle</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Math.html#.clamp">clamp</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Math.html#.degToRad">degToRad</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Math.html#.distance">distance</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Math.html#.radToDeg">radToDeg</a></li><li data-type='method'><a href="Tiny.Physics.Ant.Math.html#.wrapAngle">wrapAngle</a></li></ul></li><li><a href="Tiny.Physics.Ant.World.html">World</a><ul class='methods'><li data-type='method'><a href="Tiny.Physics.Ant.World.html#addBody">addBody</a></li><li data-type='method'><a href="Tiny.Physics.Ant.World.html#destroy">destroy</a></li><li data-type='method'><a href="Tiny.Physics.Ant.World.html#enable">enable</a></li><li data-type='method'><a href="Tiny.Physics.Ant.World.html#enableBody">enableBody</a></li><li data-type='method'><a href="Tiny.Physics.Ant.World.html#intersects">intersects</a></li><li data-type='method'><a href="Tiny.Physics.Ant.World.html#pause">pause</a></li><li data-type='method'><a href="Tiny.Physics.Ant.World.html#removeBody">removeBody</a></li><li data-type='method'><a href="Tiny.Physics.Ant.World.html#resume">resume</a></li><li data-type='method'><a href="Tiny.Physics.Ant.World.html#setBounds">setBounds</a></li><li data-type='method'><a href="Tiny.Physics.Ant.World.html#setBoundsToWorld">setBoundsToWorld</a></li></ul></li></ul><h3>Externals</h3><ul><li><a href="external-Tiny.html">Tiny</a></li></ul><h3>Namespaces</h3><ul><li><a href="Tiny.html">Tiny</a></li><li><a href="Tiny.Physics.html">Physics</a></li><li><a href="Tiny.Physics.Ant.html">Ant</a><ul class='methods'><li data-type='method'><a href="Tiny.Physics.Ant.html#startSystem">startSystem</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">BodyDebug.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*!
+ * Tiny.Physics.Ant.BodyDebug
+ * Description: Body的调试类 - 自主实现，接口方式和P2保持一致
+ * Author: fusheng.sfs
+ * Version: v0.0.1
+ */
+import * as Utils from './core/utils';
+
+/**
+* 调试的时候画出来p2.body的轮廓
+* @private
+* @name BodyDebug
+* @class BodyDebug
+* @constructor
+* @memberof Tiny.Physics.Ant
+* @extends Tiny.Sprite
+*/
+class BodyDebug extends Tiny.Sprite {
+  /**
+   * @private
+   * @constructor
+   * @param {Tiny.Physics.P2.Body} body - The P2 Body to display debug data for.
+   * @param {object} settings - Settings object.
+   */
+  constructor(body, settings) {
+    super();
+    const world = body.world;
+    /**
+    * @property {object} defaultSettings - Default debug settings.
+    * @private
+    */
+    const defaultSettings = {
+      lineWidth: 1,
+      alpha: 0.5,
+      fill: 0.5,
+      lineColor: 0x0000ff,
+      fillColor: 0xff0000,
+    };
+
+    this.settings = Utils.extend(defaultSettings, world.config.debug || {});
+
+    this.world = world;
+    this.body = body;
+    this.app = this.world.app;
+    /**
+    * @property {Tiny.Graphics} canvas - The canvas to render the debug info to.
+    */
+    this.graphics = new Tiny.Graphics();
+
+    this.graphics.alpha = this.settings.alpha;
+
+    this.addChild(this.graphics);
+
+    if (this.app.stageDebugLayer === void 0) {
+      // 这里参考 Tiny.Application中的stage的写法 创建了一个一样的layer
+      const stageDebugLayer = new Tiny.Container();
+      stageDebugLayer.scale.set(Tiny.config.multiplier);
+      this.app.camera.addChild(stageDebugLayer);
+      this.app.stageDebugLayer = stageDebugLayer;
+    }
+
+    if (this.world.app.stageDebugLayer.ant === void 0) {
+      const antDebugLayer = new Tiny.Container();
+      this.app.stageDebugLayer.addChild(antDebugLayer);
+      this.app.stageDebugLayer.ant = antDebugLayer;
+    }
+
+    this.app.stageDebugLayer.ant.addChild(this);
+
+    this.prescale = new Tiny.Point(this.body.sprite.scale.x, this.body.sprite.scale.y);
+
+    this.draw();
+
+    this.updateSpriteTransform();
+  }
+
+  /**
+   * @private
+   */
+  updateSpriteTransform() {
+    this.position.x = this.body.x;
+    this.position.y = this.body.y;
+    // this.rotation = this.body.sprite.rotation;
+    if (!this.prescale.equals(this.body.sprite.scale)) {
+      this.prescale.copy(this.body.sprite.scale);
+      this.draw();
+    }
+  }
+
+  /**
+   * @private
+   */
+  draw() {
+    // this.updateSpriteTransform();
+    const lineWidth = this.settings.lineWidth;
+    // const color = parseInt(Utils.randomPastelHex(), 16);
+    const lineColor = this.settings.lineColor;
+    const fillColor = this.settings.fillColor;
+    this.graphics.clear();
+    if (this.body.isCircle) {
+      this.drawCircle(this.graphics, this.body.halfWidth, this.body.halfHeight, this.body.halfWidth, 0, fillColor, lineColor, lineWidth);
+    } else {
+      this.drawRectangle(this.graphics, 0, 0, this.body.width, this.body.height, 0, fillColor, lineColor, lineWidth);
+    }
+    // console.log('draw3 ');
+  }
+
+  /**
+  * 圆形刚体的轮廓调试
+  *
+  * @method Tiny.Physics.P2.BodyDebug#drawCircle
+  * @private
+  */
+  drawCircle(g, x, y, radius, angle, fillColor, lineColor, lineWidth = 1) {
+    g.lineStyle(lineWidth, lineColor, 1);
+    if (this.settings.fill) {
+      g.beginFill(fillColor, 1.0);
+    }
+    g.drawCircle(x, y, radius);
+    if (this.settings.fill) {
+      g.endFill();
+    }
+    g.lineStyle(lineWidth, lineColor, 1);
+    g.moveTo(x, y);
+    g.lineTo(x + radius * Math.cos(-angle), y + radius * Math.sin(-angle));
+    // console.log('[BodyDebug] >> drawCircle', x, y, radius);
+  }
+
+  /**
+  * 矩形刚体的轮廓调试
+  *
+  * @method Tiny.Physics.P2.BodyDebug#drawRectangle
+  * @private
+  */
+  drawRectangle(g, x, y, w, h, angle, fillColor, lineColor, lineWidth = 1) {
+    g.lineStyle(lineWidth, lineColor, 1);
+    if (this.settings.fill) {
+      g.beginFill(fillColor);
+    }
+    g.drawRect(x, y, w, h);
+    if (this.settings.fill) {
+      g.endFill();
+    }
+    // console.log('[BodyDebug] >> drawRectangles:', x, y, w, h, this.body.width, this.body.height);
+  }
+}
+
+export default BodyDebug;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jul 27 2021 16:23:07 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

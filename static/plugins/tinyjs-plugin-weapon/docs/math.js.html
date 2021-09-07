@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>math.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Tiny.Weapon.Bullet.html">Bullet</a><ul class='methods'><li data-type='method'><a href="Tiny.Weapon.Bullet.html#clone">clone</a></li><li data-type='method'><a href="Tiny.Weapon.Bullet.html#kill">kill</a></li><li data-type='method'><a href="Tiny.Weapon.Bullet.html#reset">reset</a></li><li data-type='method'><a href="Tiny.Weapon.Bullet.html#revive">revive</a></li><li data-type='method'><a href="Tiny.Weapon.Bullet.html#update">update</a></li></ul></li><li><a href="Tiny.Weapon.BulletPool.html">BulletPool</a><ul class='methods'><li data-type='method'><a href="Tiny.Weapon.BulletPool.html#getOne">getOne</a></li><li data-type='method'><a href="Tiny.Weapon.BulletPool.html#isEmpty">isEmpty</a></li><li data-type='method'><a href="Tiny.Weapon.BulletPool.html#pushOne">pushOne</a></li></ul></li><li><a href="Tiny.Weapon.Emitter.html">Emitter</a><ul class='methods'><li data-type='method'><a href="Tiny.Weapon.Emitter.html#destroy">destroy</a></li><li data-type='method'><a href="Tiny.Weapon.Emitter.html#fire">fire</a></li><li data-type='method'><a href="Tiny.Weapon.Emitter.html#getWorldBounds">getWorldBounds</a></li><li data-type='method'><a href="Tiny.Weapon.Emitter.html#register">register</a></li><li data-type='method'><a href="Tiny.Weapon.Emitter.html#trackSprite">trackSprite</a></li></ul></li><li><a href="Tiny.Weapon.Point.html">Point</a><ul class='methods'><li data-type='method'><a href="Tiny.Weapon.Point.html#distance">distance</a></li><li data-type='method'><a href="Tiny.Weapon.Point.html#invert">invert</a></li><li data-type='method'><a href="Tiny.Weapon.Point.html#isZero">isZero</a></li><li data-type='method'><a href="Tiny.Weapon.Point.html#setTo">setTo</a></li><li data-type='method'><a href="Tiny.Weapon.Point.html#subtract">subtract</a></li></ul></li><li><a href="Tiny.Weapon.Rectangle.html">Rectangle</a></li></ul><h3>Externals</h3><ul><li><a href="external-Tiny.html">Tiny</a></li></ul><h3>Namespaces</h3><ul><li><a href="Tiny.Weapon.html">Weapon</a></li><li><a href="Tiny.Weapon.killTypes.html">killTypes</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">math.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+* 保证给定的angle的值在-180 到 180之间 或者 -PI 到 PI之间
+* @function
+* @static
+* @name wrapAngle
+* @memberof Tiny.Weapon.Math
+* @param {number} angle - 角度
+* @param {boolean} [radians=false] - 如果是true使用弧度 false角度 默认false
+* @return {number} 角度或者弧度 单位和angle参数一致
+*/
+export function wrapAngle(angle, radians) {
+  return radians ? this.wrap(angle, -Math.PI, Math.PI) : this.wrap(angle, -180, 180);
+}
+
+/**
+* Ensures that the value always stays between min and max, by wrapping the value around.
+*
+* If `max` is not larger than `min` the result is 0.
+* @private
+* @function
+* @static
+* @name wrap
+* @memberof Tiny.Weapon.Math
+* @param {number} value - The value to wrap.
+* @param {number} min - The minimum the value is allowed to be.
+* @param {number} max - The maximum the value is allowed to be, should be larger than `min`.
+* @return {number} The wrapped value.
+*/
+export function wrap(value, min, max) {
+  const range = max - min;
+
+  if (range &lt;= 0) {
+    return 0;
+  }
+
+  let result = (value - min) % range;
+
+  if (result &lt; 0) {
+    result += range;
+  }
+
+  return result + min;
+}
+
+const degreeToRadiansFactor = Math.PI / 180;
+const radianToDegreesFactor = 180 / Math.PI;
+
+/**
+* 把角度转成弧度
+* @function
+* @static
+* @name degToRad
+* @memberof Tiny.Weapon.Math
+* @param {number} degrees - 角度.
+* @return {number} 弧度
+*/
+export function degToRad(degrees) {
+  return degrees * degreeToRadiansFactor;
+};
+
+/**
+* 弧度转角度
+* @function
+* @static
+* @name radToDeg
+* @memberof Tiny.Weapon.Math
+* @param {number} radians - 弧度
+* @return {number} 角度
+*/
+export function radToDeg(radians) {
+  return radians * radianToDegreesFactor;
+};
+
+/**
+* 计算两个点的距离
+* @function
+* @static
+* @name distance
+* @memberof Tiny.Weapon.Math
+* @param {number} x1
+* @param {number} y1
+* @param {number} x2
+* @param {number} y2
+* @return {number}
+*/
+export function distance(x1, y1, x2, y2) {
+  const dx = x1 - x2;
+  const dy = y1 - y2;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+/**
+* 两点之间的角度
+* @function
+* @static
+* @name angle
+* @memberof Tiny.Physics.Ant.Math
+* @param {number} x1
+* @param {number} y1
+* @param {number} x2
+* @param {number} y2
+* @return {number}
+*/
+export function angle(x1, y1, x2, y2) {
+  return Math.atan2(y2 - y1, x2 - x1);
+}
+
+/**
+* 保持v在min和max之间 如果v小于min 返回min ，如果v>max 返回max 否则返回v
+* @function
+* @static
+* @name clamp
+* @memberof Tiny.Physics.Ant.Math
+* @param {float} v - The value to be clamped.
+* @param {float} min - The minimum bounds.
+* @param {float} max - The maximum bounds.
+* @return {number} The clamped value.
+*/
+export function clamp(v, min, max) {
+  if (v &lt; min) {
+    return min;
+  } else if (max &lt; v) {
+    return max;
+  } else {
+    return v;
+  }
+}
+
+/**
+* 返回介于min 和max之前的随机数
+* @function
+* @static
+* @name clamp
+* @memberof Tiny.Physics.Ant.Math
+* @param {number} [min=0] - 最小数
+* @param {number} [max=1] - 最大数
+* @return {number}  返回介于min 和max之前的随机数
+*/
+export function between(min = 0, max = 1) {
+  if (min === max) {
+    return min;
+  }
+
+  if (min &lt; max) {
+    const temp = min;
+    min = max;
+    max = temp;
+  }
+
+  min = Math.ceil(min);
+  max = Math.floor(max);
+
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jul 27 2021 16:25:48 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

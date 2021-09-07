@@ -1,0 +1,33 @@
+/**
+ * 此示例需要安装插件：tinyjs-plugin-ui
+ * 由于安全策略，ui.DOM 的渲染模式只支持 canvas，如果要用，需要将固定设置启动参数 renderType 为 Tiny.RENDERER_TYPE.CANVAS
+ */
+
+// 主场景
+var Layer = function() {
+  Tiny.Container.call(this);
+
+  // 写一段 HTML，并使用 font-family
+  var html = '<div style="font-family:AlipayNumber;height:44px;font-size:30px;color:#fff">AlipayNumber 1234.56</div>';
+  // 定义一个 base64 格式的字体
+  // 字体文件转 base64：https://transfonter.org/
+  var defs = `<defs><style type="text/css">@font-face {font-family:AlipayNumber;src:url(data:application/font-woff;charset=utf-8;base64,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);}</style></defs>`;
+  // 用上面的那段 HTML 生成 DOM 显示对象，用 defs 声明 font-face
+  // 实例化后的 dom 实际就是一个 Tiny.Container，所以，事件绑定或形态变化可直接按显示对象操作
+  try {
+    var dom = new Tiny.ui.DOM({
+      html: html,
+      defs: defs,
+    });
+    // 将实例化的 dom 直接添加到显示容器中
+    this.addChild(dom);
+  } catch (e) {
+    this.addChild(new Tiny.Text('当前环境不支持 Tiny.ui.Dom', {
+      fill: 'white',
+    }));
+  }
+};
+
+// constructor
+Layer.prototype = Object.create(Tiny.Container.prototype);
+Layer.prototype.constructor = Layer;

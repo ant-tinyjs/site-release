@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Alert.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Tiny.ui.Alert.html">Alert</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Alert.html#alert">alert</a></li></ul></li><li><a href="Tiny.ui.Button.html">Button</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Button.html#updatePosition">updatePosition</a></li></ul></li><li><a href="Tiny.ui.DOM.html">DOM</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.DOM.html#updateHTML">updateHTML</a></li></ul></li><li><a href="Tiny.ui.ImageNumber.html">ImageNumber</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.ImageNumber.html#create">create</a></li><li data-type='method'><a href="Tiny.ui.ImageNumber.html#update">update</a></li></ul></li><li><a href="Tiny.ui.InlineItems.html">InlineItems</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.InlineItems.html#deleteItem">deleteItem</a></li><li data-type='method'><a href="Tiny.ui.InlineItems.html#layout">layout</a></li><li data-type='method'><a href="Tiny.ui.InlineItems.html#spliceItems">spliceItems</a></li></ul></li><li><a href="Tiny.ui.InputBase.html">InputBase</a></li><li><a href="Tiny.ui.Label.html">Label</a></li><li><a href="Tiny.ui.NinePatch.html">NinePatch</a></li><li><a href="Tiny.ui.TiledText.html">TiledText</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.TiledText.html#create">create</a></li></ul></li><li><a href="Tiny.ui.Toast.html">Toast</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Toast.html#show">show</a></li></ul></li><li><a href="Tiny.ui.UIBase.html">UIBase</a></li><li><a href="TIny.ui.UISettings.html">UISettings</a></li></ul><h3>Externals</h3><ul><li><a href="external-Tiny.html">Tiny</a></li></ul><h3>Namespaces</h3><ul><li><a href="Tiny.ui.html">ui</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Alert.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import InputBase from './InputBase';
+import Label from './Label';
+import Button from './Button';
+import NinePatch from './NinePatch';
+
+/**
+ * Alert 组件
+ *
+ * @example
+ * var tinyAlert = new Tiny.ui.Alert(mainContainer, buttonText);
+ * tinyAlert.alert('123', function() {
+ *    // your code here
+ * });
+ *
+ * @class
+ * @extends Tiny.ui.InputBase
+ * @memberof Tiny.ui
+ * @version 0.1.0
+ */
+
+class Alert extends InputBase {
+  /**
+   * @param {Tiny.Application} app - Tiny.Application的实例
+   * @param {string} buttonText - 弹框的按钮文案，不传则为’关闭‘
+   */
+  constructor(app, buttonText) {
+    super();
+
+    this.stage = app &amp;&amp; app.stage || null; //eslint-disable-line
+    this.buttonText = buttonText || '关闭';
+
+    //constant
+    this.DPI = Tiny.config.dpi;
+    this.PADDING = 40 * this.DPI;
+    this.CONTENT_FONTSIZE = 16 * this.DPI;
+    this.BTN_FONTSIZE = 14 * this.DPI;
+    this.MIN_HEIGHT = 50 * this.DPI;
+    this.MAX_WIDTH = Tiny.WIN_SIZE.width * 0.8;
+  }
+
+  render(text) {
+    this.removeChildren(0, this.children.length);
+    //渲染label
+    this.label = this.drawLabel(text);
+
+    //渲染矩形框
+    this.roundRect = this.drawRoundRect();
+
+    //渲染按钮
+    this.btn = this.drawButton();
+
+    this.updatePosition();
+  };
+
+  drawLabel(text) {
+    const label = new Label({
+      text,
+      fill: '0x333333',
+      fontSize: this.CONTENT_FONTSIZE,
+      width: this.MAX_WIDTH - this.PADDING,
+    });
+    this.addChild(label);
+
+    return label;
+  };
+
+  drawRoundRect() {
+    const { height } = this.getLocalBounds();
+    const finalHeight = height > this.MIN_HEIGHT &amp;&amp; height + this.PADDING || this.MIN_HEIGHT + this.PADDING; //eslint-disable-line
+    const baseTexture = Tiny.BaseTexture.from(this.setting.roundRectBase64_white);
+    const texture = new Tiny.Texture(baseTexture);
+    const sprite = new NinePatch(
+      texture,
+      this.MAX_WIDTH,
+      finalHeight,
+      [10, 10, 1, 1]
+    );
+    Tiny.BaseTexture.removeFromCache(baseTexture);
+    this.addChild(sprite);
+
+    return sprite;
+  };
+
+  drawButton() {
+    const btn = new Button({
+      text: this.buttonText,
+      textStyle: {
+        fill: '0x108EE9',
+        fontSize: this.BTN_FONTSIZE,
+      },
+      active: {
+        opacity: 0.5,
+        callback: () => {
+          this.stage &amp;&amp; this.stage.removeChild(this);
+          this.callback &amp;&amp; this.callback();
+        },
+      },
+    });
+
+    this.addChild(btn);
+
+    return btn;
+  };
+
+  updatePosition() {
+    const { width, height } = this.roundRect;
+    const win = Tiny.WIN_SIZE;
+    this.btn.setPosition(this.MAX_WIDTH - this.btn.width, height - this.btn.height);
+    this.label.setPosition(this.MAX_WIDTH / 2 - this.label.width / 2, height / 2 - this.label.height / 2 - 5 * this.DPI);
+    this.setChildIndex(this.label, 1);
+    this.setPosition(win.width / 2 - width / 2, win.height / 2 - height / 2);
+  };
+
+  /**
+   * 弹出框的弹出方法，调用后才能弹出。
+   * 调用时可以弹出不同的文案，同时执行不同的回调函数
+   *
+   * @param {string} text - 弹出的文案
+   * @param {function} callback - 点击弹出框按钮时的回调函数
+   */
+  alert(text, callback) {
+    if (this.stage) {
+      this.stage.removeChild(this);
+      this.render(text);
+      this.stage.addChild(this);
+      this.callback = callback;
+    }
+  }
+}
+
+export default Alert;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jul 27 2021 16:05:17 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

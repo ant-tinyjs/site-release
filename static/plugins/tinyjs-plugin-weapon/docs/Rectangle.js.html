@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Rectangle.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Tiny.Weapon.Bullet.html">Bullet</a><ul class='methods'><li data-type='method'><a href="Tiny.Weapon.Bullet.html#clone">clone</a></li><li data-type='method'><a href="Tiny.Weapon.Bullet.html#kill">kill</a></li><li data-type='method'><a href="Tiny.Weapon.Bullet.html#reset">reset</a></li><li data-type='method'><a href="Tiny.Weapon.Bullet.html#revive">revive</a></li><li data-type='method'><a href="Tiny.Weapon.Bullet.html#update">update</a></li></ul></li><li><a href="Tiny.Weapon.BulletPool.html">BulletPool</a><ul class='methods'><li data-type='method'><a href="Tiny.Weapon.BulletPool.html#getOne">getOne</a></li><li data-type='method'><a href="Tiny.Weapon.BulletPool.html#isEmpty">isEmpty</a></li><li data-type='method'><a href="Tiny.Weapon.BulletPool.html#pushOne">pushOne</a></li></ul></li><li><a href="Tiny.Weapon.Emitter.html">Emitter</a><ul class='methods'><li data-type='method'><a href="Tiny.Weapon.Emitter.html#destroy">destroy</a></li><li data-type='method'><a href="Tiny.Weapon.Emitter.html#fire">fire</a></li><li data-type='method'><a href="Tiny.Weapon.Emitter.html#getWorldBounds">getWorldBounds</a></li><li data-type='method'><a href="Tiny.Weapon.Emitter.html#register">register</a></li><li data-type='method'><a href="Tiny.Weapon.Emitter.html#trackSprite">trackSprite</a></li></ul></li><li><a href="Tiny.Weapon.Point.html">Point</a><ul class='methods'><li data-type='method'><a href="Tiny.Weapon.Point.html#distance">distance</a></li><li data-type='method'><a href="Tiny.Weapon.Point.html#invert">invert</a></li><li data-type='method'><a href="Tiny.Weapon.Point.html#isZero">isZero</a></li><li data-type='method'><a href="Tiny.Weapon.Point.html#setTo">setTo</a></li><li data-type='method'><a href="Tiny.Weapon.Point.html#subtract">subtract</a></li></ul></li><li><a href="Tiny.Weapon.Rectangle.html">Rectangle</a></li></ul><h3>Externals</h3><ul><li><a href="external-Tiny.html">Tiny</a></li></ul><h3>Namespaces</h3><ul><li><a href="Tiny.Weapon.html">Weapon</a></li><li><a href="Tiny.Weapon.killTypes.html">killTypes</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Rectangle.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Rectangle
+ * @class Rectangle
+ * @constructor
+ * @memberof Tiny.Weapon
+ * @extends Tiny.Rectangle
+ */
+class Rectangle extends Tiny.Rectangle {
+  /**
+   * @param {number} [x=0] - x坐标
+   * @param {number} [y=0] - y坐标
+   * @param {number} [width=0] - 宽度
+   * @param {number} [height=0] - 高度
+   */
+  constructor(x = 0, y = 0, width = 0, height = 0) {
+    super(x, y, width, height);
+  }
+
+  /**
+   * 把矩形的中心点设置在x,y
+   * @name Tiny.Weapon.Rectangle#halfWidth
+   * @property {number} x - x 坐标
+   * @property {number} y - y 坐标
+   */
+  centerOn(x, y) {
+    this.centerX = x;
+    this.centerY = y;
+    return this;
+  }
+
+  /**
+  * 宽度的1/2
+  * @name Tiny.Weapon.Rectangle#halfWidth
+  * @property {number} halfWidth - 宽度的1/2
+  */
+  get halfWidth() {
+    return this.width / 2;
+  }
+
+  /**
+  * 高度的1/2
+  * @name Tiny.Weapon.Rectangle#halfWidth
+  * @property {number} halfWidth - 高度的1/2
+  */
+  get halfHeight() {
+    this.x = this.height / 2;
+  }
+
+  /**
+  * 矩形中心的x坐标
+  * @name Tiny.Weapon.Rectangle#centerY
+  * @property {number} centerY - 矩形中心的x坐标
+  */
+  get centerX() {
+    return this.x + this.halfWidth;
+  }
+  set centerX(value) {
+    this.x = value - this.halfWidth;
+  }
+
+  /**
+  * 矩形中心的y坐标
+  * @name Tiny.Weapon.Rectangle#centerY
+  * @property {number} centerY - 矩形中心的y坐标
+  */
+  get centerY() {
+    return this.y + this.halfHeight;
+  }
+  set centerY(value) {
+    this.y = value - this.halfHeight;
+  }
+
+  /**
+  * @name Tiny.Weapon.Rectangle#randomX
+  * @property {number} randomX - 介于矩形的左边界和右边界之间的随机数
+  */
+  get randomX() {
+    return this.x + (Math.random() * this.width);
+  }
+
+  /**
+  * @name Tiny.Weapon.Rectangle#randomY
+  * @property {number} randomY - 介于矩形的上边界和下边界之间的随机数
+  */
+  get randomY() {
+    return this.y + (Math.random() * this.height);
+  }
+}
+
+export default Rectangle;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jul 27 2021 16:25:48 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

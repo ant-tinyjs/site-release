@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TiledText - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Tiny.ui.Alert.html">Alert</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Alert.html#alert">alert</a></li></ul></li><li><a href="Tiny.ui.Button.html">Button</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Button.html#updatePosition">updatePosition</a></li></ul></li><li><a href="Tiny.ui.DOM.html">DOM</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.DOM.html#updateHTML">updateHTML</a></li></ul></li><li><a href="Tiny.ui.ImageNumber.html">ImageNumber</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.ImageNumber.html#create">create</a></li><li data-type='method'><a href="Tiny.ui.ImageNumber.html#update">update</a></li></ul></li><li><a href="Tiny.ui.InlineItems.html">InlineItems</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.InlineItems.html#deleteItem">deleteItem</a></li><li data-type='method'><a href="Tiny.ui.InlineItems.html#layout">layout</a></li><li data-type='method'><a href="Tiny.ui.InlineItems.html#spliceItems">spliceItems</a></li></ul></li><li><a href="Tiny.ui.InputBase.html">InputBase</a></li><li><a href="Tiny.ui.Label.html">Label</a></li><li><a href="Tiny.ui.NinePatch.html">NinePatch</a></li><li><a href="Tiny.ui.TiledText.html">TiledText</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.TiledText.html#create">create</a></li></ul></li><li><a href="Tiny.ui.Toast.html">Toast</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Toast.html#show">show</a></li></ul></li><li><a href="Tiny.ui.UIBase.html">UIBase</a></li><li><a href="TIny.ui.UISettings.html">UISettings</a></li></ul><h3>Externals</h3><ul><li><a href="external-Tiny.html">Tiny</a></li></ul><h3>Namespaces</h3><ul><li><a href="Tiny.ui.html">ui</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">TiledText</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+            <span class="ancestors"><a href="Tiny.ui.html">.ui</a>.</span>
+        
+        TiledText
+        </h2>
+        
+            <div class="class-description">TiledText 组件</div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="TiledText"><span class="type-signature"></span>new TiledText<span class="signature">(container, style<span class="signature-attributes">opt</span>, canvas<span class="signature-attributes">opt</span>, num<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TiledText.js.html">TiledText.js</a>, <a href="TiledText.js.html#line26">line 26</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    使用一个离屏 Canvas 绘制所有的相同样式、单行的文字，相对来说更省内存，对小程序的文本更友好
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>const tiledText = new Tiny.ui.TiledText(container, {
+  fontSize: 32,
+  fontFamily: 'Arial',
+  fill: '#ffffff',
+});
+
+const txt = tiledText.create('你好，世界');
+const txt2 = tiledText.create('你好，人类');
+
+container.addChild(txt, txt2);</code></pre>
+
+    <pre class="prettyprint"><code>// 文字的更新
+txt.updateText(`当前时间：${new Date().getTime()}`);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>container</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Tiny.Container</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>style</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+|
+
+<span class="param-type">Tiny.TextStyle</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>canvas</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLCanvasElement</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>num</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>30</code>
+                
+                </td>
+            
+
+            <td class="description last">默认行数，可认为是单个 TiledText 示例允许创建的最大值</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="create"><span class="type-signature"></span>create<span class="signature">(text)</span><span class="type-signature"> &rarr; {Tiny.Sprite}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TiledText.js.html">TiledText.js</a>, <a href="TiledText.js.html#line55">line 55</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    创建 TiledText 的 UI 对象
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Tiny.Sprite</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jul 27 2021 16:05:18 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

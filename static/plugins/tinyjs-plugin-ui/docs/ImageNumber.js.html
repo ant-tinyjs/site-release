@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ImageNumber.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Tiny.ui.Alert.html">Alert</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Alert.html#alert">alert</a></li></ul></li><li><a href="Tiny.ui.Button.html">Button</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Button.html#updatePosition">updatePosition</a></li></ul></li><li><a href="Tiny.ui.DOM.html">DOM</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.DOM.html#updateHTML">updateHTML</a></li></ul></li><li><a href="Tiny.ui.ImageNumber.html">ImageNumber</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.ImageNumber.html#create">create</a></li><li data-type='method'><a href="Tiny.ui.ImageNumber.html#update">update</a></li></ul></li><li><a href="Tiny.ui.InlineItems.html">InlineItems</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.InlineItems.html#deleteItem">deleteItem</a></li><li data-type='method'><a href="Tiny.ui.InlineItems.html#layout">layout</a></li><li data-type='method'><a href="Tiny.ui.InlineItems.html#spliceItems">spliceItems</a></li></ul></li><li><a href="Tiny.ui.InputBase.html">InputBase</a></li><li><a href="Tiny.ui.Label.html">Label</a></li><li><a href="Tiny.ui.NinePatch.html">NinePatch</a></li><li><a href="Tiny.ui.TiledText.html">TiledText</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.TiledText.html#create">create</a></li></ul></li><li><a href="Tiny.ui.Toast.html">Toast</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Toast.html#show">show</a></li></ul></li><li><a href="Tiny.ui.UIBase.html">UIBase</a></li><li><a href="TIny.ui.UISettings.html">UISettings</a></li></ul><h3>Externals</h3><ul><li><a href="external-Tiny.html">Tiny</a></li></ul><h3>Namespaces</h3><ul><li><a href="Tiny.ui.html">ui</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">ImageNumber.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * ImageNumber 组件
+ *
+ * @description
+ * 可以通过传入图片来拼接出数字
+ *
+ * @example
+ * // 使用 Tiny.loaders.Loader 将相关资源加载后
+ * var numberObj = {};
+ *
+ * for (var i = 0; i &lt; 10; i++) {
+ *   numberObj[i] = Tiny.TextureCache['https://gw.alipayobjects.com/os/lib/alipay/tiny-resources/1.0.2/dist/images/snumber/s' + i + '.png'];
+ * }
+ *
+ * var number = new Tiny.ui.ImageNumber(numberObj);
+ * var numberUI = number.create('1234567890');
+ *
+ * numberUI.setPositionY(120);
+ * this.addChild(numberUI);
+ *
+ * @example
+ * // 当然，我们推荐使用 tileset，更方便，更安心
+ * var loader = new Tiny.loaders.Loader();
+ * loader
+ *  .add(['res/tileset-number.json'])
+ *  .load(function() {
+ *    var numberObj = {};
+ *
+ *    for (var i = 0; i &lt; 10; i++) {
+ *      numberObj[i] = Tiny.TextureCache['tileset-number-' + i + '.png'];
+ *    }
+ *
+ *    var number = new Tiny.ui.ImageNumber(numberObj);
+ *    var numberUI = number.create('31415926');
+ *  });
+ *
+ * @class
+ * @memberof Tiny.ui
+ */
+class ImageNumber {
+  /**
+   *
+   * @param {object} matchup - 字符和 Texture 的对应关系对象
+   */
+  constructor(matchup) {
+    this.matchup = matchup;
+  }
+
+  /**
+   * 创建 ImageNumber 的 UI 对象
+   *
+   * @param {string} string - 字符
+   * @param {Tiny.Container} container - 可选，包裹的容器
+   * @return {Tiny.Container}
+   */
+  create(string = '', container = new Tiny.Container()) {
+    const arr = string.split('');
+    const matchup = this.matchup;
+    let totalWidth = 0;
+
+    arr.forEach(item => {
+      const texture = matchup[item];
+
+      if (texture) {
+        const sprite = new Tiny.Sprite(matchup[item]);
+        let { width } = texture;
+
+        sprite.setPositionX(totalWidth);
+        totalWidth += width;
+        container.addChild(sprite);
+      }
+    });
+
+    this.container = container;
+
+    return container;
+  }
+
+  /**
+   * 更新字符
+   *
+   * @example
+   * var number = new Tiny.ui.ImageNumber({...});
+   * var numberUI = number.create('1234567890');
+   *
+   * number.update('666');
+   *
+   * var numberUI2 = number.create('31415926');
+   * number.update('999', numberUI2);
+   *
+   * @param {string} string - 更新的字符
+   * @param {Tiny.Container} container - 可选，不传会使用 create 创建的 Container 对象
+   * @return {Tiny.Container}
+   */
+  update(string = '', container) {
+    if (!container) {
+      if (this.container) {
+        container = this.container;
+      } else {
+        container = new Tiny.Container();
+      }
+    }
+    container.removeChildren();
+    this.create.call(this, string, container); //eslint-disable-line
+
+    return container;
+  }
+}
+
+export default ImageNumber;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jul 27 2021 16:05:17 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

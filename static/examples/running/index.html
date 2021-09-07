@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Running</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="full-screen" content="yes"/>
+<meta name="screen-orientation" content="portrait"/>
+<meta name="x5-fullscreen" content="true"/>
+<meta name="360-fullscreen" content="true"/>
+<style>
+html, body, p, div {margin:0;padding:0;}
+body {background-color: #000;font-size:4vmin;}
+html, body {height: 100%;overflow: hidden;}
+.bar {margin:0 auto;margin-top:150px;height:4px;width:80%;border-radius:2px;overflow:hidden;background:#666;}
+.bar i {display:block;width:0;height:4px;background-color:#999;}
+p {margin-top:5px;text-align:center;color:#ddd;}
+</style>
+<link rel="stylesheet" href="orientation.css" />
+</head>
+<body>
+<div class="bar">
+    <i id="progress"></i>
+</div>
+<p id="percent">Loading..</p>
+
+<div id="orientPanel" class="orient-panel">
+    <div class="content">
+        <i class="icon"></i>
+        <div class="desc">为了获得更好的体验，请使用横屏游戏</div>
+    </div>
+</div>
+
+<script src='https://gw.alipayobjects.com/as/g/tiny/tiny/1.2.0/tiny.js'></script>
+<script src='https://gw.alipayobjects.com/as/g/tiny-plugins/tinyjs-plugin-keyboard/0.1.0/index.js'></script>
+<script src='https://gw.alipayobjects.com/as/g/tiny-plugins/tinyjs-plugin-audio/1.1.1/index.js'></script>
+<script src='src/Util.js'></script>
+<script src='src/Resource.js'></script>
+<script src='src/ObjectPool.js'></script>
+<script src='src/Timer.js'></script>
+<script src='src/Game.js'></script>
+<script src='src/Sound.js'></script>
+<script src='src/CountDown.js'></script>
+<script src='src/Magma.js'></script>
+<script src='src/Background.js'></script>
+<script src='src/LowFiBackground.js'></script>
+<script src='src/JoyBackground.js'></script>
+<script src='src/Avatar.js'></script>
+<script src='src/Ground.js'></script>
+<script src='src/Enemy.js'></script>
+<script src='src/Pickup.js'></script>
+<script src='src/Segment.js'></script>
+<script src='src/Score.js'></script>
+<script src='src/BestScore.js'></script>
+<script src='src/Trail.js'></script>
+<script src='src/TrailFire.js'></script>
+<script src='src/CollisionManager.js'></script>
+<script src='src/Explosion.js'></script>
+<script src='src/GameOver.js'></script>
+<script src='src/MainView.js'></script>
+<script src='src/StartLayer.js'></script>
+<script src='main.js'></script>
+</body>
+</html>

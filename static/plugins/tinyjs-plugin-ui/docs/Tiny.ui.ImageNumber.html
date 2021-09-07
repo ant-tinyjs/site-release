@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ImageNumber - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Tiny.ui.Alert.html">Alert</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Alert.html#alert">alert</a></li></ul></li><li><a href="Tiny.ui.Button.html">Button</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Button.html#updatePosition">updatePosition</a></li></ul></li><li><a href="Tiny.ui.DOM.html">DOM</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.DOM.html#updateHTML">updateHTML</a></li></ul></li><li><a href="Tiny.ui.ImageNumber.html">ImageNumber</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.ImageNumber.html#create">create</a></li><li data-type='method'><a href="Tiny.ui.ImageNumber.html#update">update</a></li></ul></li><li><a href="Tiny.ui.InlineItems.html">InlineItems</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.InlineItems.html#deleteItem">deleteItem</a></li><li data-type='method'><a href="Tiny.ui.InlineItems.html#layout">layout</a></li><li data-type='method'><a href="Tiny.ui.InlineItems.html#spliceItems">spliceItems</a></li></ul></li><li><a href="Tiny.ui.InputBase.html">InputBase</a></li><li><a href="Tiny.ui.Label.html">Label</a></li><li><a href="Tiny.ui.NinePatch.html">NinePatch</a></li><li><a href="Tiny.ui.TiledText.html">TiledText</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.TiledText.html#create">create</a></li></ul></li><li><a href="Tiny.ui.Toast.html">Toast</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Toast.html#show">show</a></li></ul></li><li><a href="Tiny.ui.UIBase.html">UIBase</a></li><li><a href="TIny.ui.UISettings.html">UISettings</a></li></ul><h3>Externals</h3><ul><li><a href="external-Tiny.html">Tiny</a></li></ul><h3>Namespaces</h3><ul><li><a href="Tiny.ui.html">ui</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">ImageNumber</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+            <span class="ancestors"><a href="Tiny.ui.html">.ui</a>.</span>
+        
+        ImageNumber
+        </h2>
+        
+            <div class="class-description">ImageNumber 组件</div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="ImageNumber"><span class="type-signature"></span>new ImageNumber<span class="signature">(matchup)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ImageNumber.js.html">ImageNumber.js</a>, <a href="ImageNumber.js.html#line40">line 40</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    可以通过传入图片来拼接出数字
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>// 使用 Tiny.loaders.Loader 将相关资源加载后
+var numberObj = {};
+
+for (var i = 0; i &lt; 10; i++) {
+  numberObj[i] = Tiny.TextureCache['https://gw.alipayobjects.com/os/lib/alipay/tiny-resources/1.0.2/dist/images/snumber/s' + i + '.png'];
+}
+
+var number = new Tiny.ui.ImageNumber(numberObj);
+var numberUI = number.create('1234567890');
+
+numberUI.setPositionY(120);
+this.addChild(numberUI);</code></pre>
+
+    <pre class="prettyprint"><code>// 当然，我们推荐使用 tileset，更方便，更安心
+var loader = new Tiny.loaders.Loader();
+loader
+ .add(['res/tileset-number.json'])
+ .load(function() {
+   var numberObj = {};
+
+   for (var i = 0; i &lt; 10; i++) {
+     numberObj[i] = Tiny.TextureCache['tileset-number-' + i + '.png'];
+   }
+
+   var number = new Tiny.ui.ImageNumber(numberObj);
+   var numberUI = number.create('31415926');
+ });</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>matchup</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">字符和 Texture 的对应关系对象</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="create"><span class="type-signature"></span>create<span class="signature">(string, container)</span><span class="type-signature"> &rarr; {Tiny.Container}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ImageNumber.js.html">ImageNumber.js</a>, <a href="ImageNumber.js.html#line56">line 56</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    创建 ImageNumber 的 UI 对象
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>string</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">字符</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>container</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Tiny.Container</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">可选，包裹的容器</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Tiny.Container</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="update"><span class="type-signature"></span>update<span class="signature">(string, container)</span><span class="type-signature"> &rarr; {Tiny.Container}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ImageNumber.js.html">ImageNumber.js</a>, <a href="ImageNumber.js.html#line95">line 95</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    更新字符
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>var number = new Tiny.ui.ImageNumber({...});
+var numberUI = number.create('1234567890');
+
+number.update('666');
+
+var numberUI2 = number.create('31415926');
+number.update('999', numberUI2);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>string</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">更新的字符</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>container</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Tiny.Container</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">可选，不传会使用 create 创建的 Container 对象</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Tiny.Container</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jul 27 2021 16:05:17 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

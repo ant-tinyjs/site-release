@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>荒野大作战</title>
+  <meta charset="utf-8">
+  <!-- tiny 基础库 -->
+  <script src="https://gw.alipayobjects.com/as/g/tiny/tiny/1.1.5/tiny.js"></script>
+  <!-- ant物理系统 -->
+  <script src="https://gw.alipayobjects.com/as/g/tiny-plugins/tinyjs-plugin-ant/0.1.2/index.debug.js"></script>
+  <!-- tiling插件 用来实现滚动背景图效果 -->
+  <script src="https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-tiling/0.0.1/index.debug.js"></script>
+  <!-- 键盘插件 监听键盘事件 -->
+  <script src="https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-keyboard/0.0.1/index.debug.js"></script>
+  <!-- 游戏对象运动边界控制插件 -->
+  <script src="https://gw.alipayobjects.com/as/g/tiny-plugins/tinyjs-plugin-worldwrap/0.0.1/index.js"></script>
+  <script src="libs/dat.gui.min.js"></script>
+  <script src="../dist/index.debug.js"></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2,minimum-scale=1,user-scalable=1">
+  <style type="text/css">
+    body,
+    html,
+    canvas {
+      padding: 0;
+      margin: 0;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    }
+
+    select {
+      color: white;
+      background: black;
+      -webkit-appearance: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    var config = {
+      showFPS: true, // 显示帧频
+      width: 320,
+      height: 568,
+      fixSize: true,
+      renderOptions: {
+        backgroundColor: 0x2a3145 // 画布背景色
+      }
+    };
+
+    var app = new Tiny.Application(config);
+
+    // 启用物理系统
+    Tiny.Physics.Ant.startSystem(app, {
+      gravity: [0, 0],
+      debug: {
+        lineWidth: 1,
+        alpha: 1,
+        fill: false,
+        fillColor: 0xff0000,
+        lineColor: 0xff0000,
+      }
+    });
+
+    function setTitle(title, container) {
+      var title = new Tiny.Text(title, {
+        fontSize: '18px',
+        fill: 'white',
+      });
+
+      title.position.set(Tiny.WIN_SIZE.width / 2, 30);
+      title.anchor.set(0.5, 0);
+      container.addChild(title);
+    }
+
+    function accelerationFromRotation(rotation, speed = 60, point) {
+      point = point || new Tiny.Point();
+      point.x = (Math.cos(rotation) * speed);
+      point.y = (Math.sin(rotation) * speed);
+      return point;
+    }
+
+    var sprite;
+    function init() {
+      container = new Tiny.Container();
+
+      setTitle('荒野大作战', container);
+
+      // => BEGIN 初始化滚动背景
+      var tilingTexture = Tiny.Loader.resources['backgorund'].texture;
+      var tilingSprite = new Tiny.tiling.TilingSprite(tilingTexture, Tiny.WIN_SIZE.width, Tiny.WIN_SIZE.height);
+      container.addChild(tilingSprite);
+
+      tilingSprite.tileScale.x = Tiny.WIN_SIZE.width / tilingTexture.width;
+      // <= END 初始化滚动背景
+
+      // => BEGIN 初始化飞机
+      sprite = new Tiny.Sprite(Tiny.Loader.resources['player'].texture);
+
+      sprite.position.x = Tiny.WIN_SIZE.width / 2;
+      sprite.position.y = Tiny.WIN_SIZE.height - 100;
+      sprite.anchor.set(0.5);
+
+      app.physics.ant.enable(sprite, false);
+
+      // sprite.body.collideWorldBounds = true;
+
+      container.addChild(sprite);
+      // <= END 初始化飞机
+
+      // => BEGIN 初始化武器系统
+      weapon = new Tiny.Weapon.Emitter(app, Tiny.Loader.resources['bullet'].texture);
+      // 子弹运行的速度
+      weapon.bulletSpeed = 400;
+      // 子弹发射的频率 两次发射不能低于这个数值
+      weapon.fireRate = 300;
+      // 是否自动发射
+      weapon.autofire = true;
+
+      // 根据时间销毁
+      // weapon.bulletKillType = Tiny.Weapon.killTypes.KILL_LIFESPAN;
+      // weapon.bulletLifespan = 500;
+
+      // 根据距离销毁
+      // weapon.bulletKillType = Tiny.Weapon.killTypes.KILL_DISTANCE;
+      // weapon.bulletKillDistance = 50;
+      weapon.trackSprite(sprite, 0, -sprite.height / 2, true, -90);
+
+      container.addChild(weapon);
+      // <= END 初始化武器系统
+
+      app.run(container);
+
+      var angle = 0;
+
+      var leftArrow = new Tiny.Keyboard(37);
+      var rightArrow = new Tiny.Keyboard(39);
+      var upArrow = new Tiny.Keyboard(38);
+      var downArrow = new Tiny.Keyboard(40);
+      var spaceBar = new Tiny.Keyboard(32);
+
+      app.onUpdate(function () {
+        tilingSprite.tilePosition.y += 5;
+
+        if (upArrow.isDown || downArrow.isDown) {
+          accelerationFromRotation(sprite.rotation - Math.PI / 2, downArrow.isDown ? -300 : 300, sprite.body.acceleration);
+        } else {
+          sprite.body.acceleration.set(0);
+          sprite.body.velocity.set(0);
+        }
+
+        // 按下空格键主动发射子弹
+        if (spaceBar.isDown) {
+          weapon.fire();
+        }
+
+        if (leftArrow.isDown) {
+          angle = (360 + angle - 3) % 360;
+        } else if (rightArrow.isDown) {
+          angle = (360 + angle + 3) % 360;
+        }
+        rotation(angle);
+
+        Tiny.WorldWrap.wrap(app, sprite, 25);
+      });
+
+
+      // 控制界面
+      var gui = new dat.GUI({
+      });
+
+      var weaponConfig = {
+        bulletKillType: ''
+      };
+
+      // 增加界面调试控制 具体data.GUI的使用方法请移步官网
+      var killTypes = ["KILL_NEVER", "KILL_LIFESPAN", "KILL_DISTANCE", "KILL_WEAPON_BOUNDS", "KILL_WORLD_BOUNDS"];
+      gui.add(weaponConfig, 'bulletKillType', killTypes).onChange(function () {
+        weapon.bulletKillType = killTypes.indexOf(weaponConfig.bulletKillType);
+      });
+
+      gui.add(weapon, 'bulletLifespan', 100, 5000);
+      gui.add(weapon, 'bulletKillDistance', 50, 500);
+      gui.add(weapon, 'bulletSpeed', 0, 1000);
+      gui.add(weapon, 'fireRate', 0, 600);
+      gui.add(weapon, 'autofire');
+      gui.close();
+    }
+
+    function rotation(angle) {
+      sprite.rotation = Tiny.Weapon.Math.degToRad(angle);
+    }
+
+    Tiny.Loader
+      .add('backgorund', 'images/desert-backgorund-looped.png')
+      .add('player', 'images/blue.png')
+      .add('bullet', 'images/new_bullet.png')
+      .load(function () {
+        init();
+      });
+  </script>
+</body>
+
+</html>

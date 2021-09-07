@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Plane.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Tiny.mesh.Mesh.html">Mesh</a><ul class='methods'><li data-type='method'><a href="Tiny.mesh.Mesh.html#_calculateBounds">_calculateBounds</a></li><li data-type='method'><a href="Tiny.mesh.Mesh.html#_refresh">_refresh</a></li><li data-type='method'><a href="Tiny.mesh.Mesh.html#containsPoint">containsPoint</a></li><li data-type='method'><a href="Tiny.mesh.Mesh.html#destroy">destroy</a></li><li data-type='method'><a href="Tiny.mesh.Mesh.html#multiplyUvs">multiplyUvs</a></li><li data-type='method'><a href="Tiny.mesh.Mesh.html#refresh">refresh</a></li></ul></li><li><a href="Tiny.mesh.NineSlicePlane.html">NineSlicePlane</a><ul class='methods'><li data-type='method'><a href="Tiny.mesh.NineSlicePlane.html#_calculateBounds">_calculateBounds</a></li><li data-type='method'><a href="Tiny.mesh.NineSlicePlane.html#_refresh">_refresh</a></li><li data-type='method'><a href="Tiny.mesh.NineSlicePlane.html#containsPoint">containsPoint</a></li><li data-type='method'><a href="Tiny.mesh.NineSlicePlane.html#destroy">destroy</a></li><li data-type='method'><a href="Tiny.mesh.NineSlicePlane.html#multiplyUvs">multiplyUvs</a></li><li data-type='method'><a href="Tiny.mesh.NineSlicePlane.html#refresh">refresh</a></li><li data-type='method'><a href="Tiny.mesh.NineSlicePlane.html#updateHorizontalVertices">updateHorizontalVertices</a></li><li data-type='method'><a href="Tiny.mesh.NineSlicePlane.html#updateVerticalVertices">updateVerticalVertices</a></li></ul></li><li><a href="Tiny.mesh.Plane.html">Plane</a><ul class='methods'><li data-type='method'><a href="Tiny.mesh.Plane.html#_calculateBounds">_calculateBounds</a></li><li data-type='method'><a href="Tiny.mesh.Plane.html#_refresh">_refresh</a></li><li data-type='method'><a href="Tiny.mesh.Plane.html#containsPoint">containsPoint</a></li><li data-type='method'><a href="Tiny.mesh.Plane.html#destroy">destroy</a></li><li data-type='method'><a href="Tiny.mesh.Plane.html#multiplyUvs">multiplyUvs</a></li><li data-type='method'><a href="Tiny.mesh.Plane.html#refresh">refresh</a></li></ul></li><li><a href="Tiny.mesh.Rope.html">Rope</a><ul class='methods'><li data-type='method'><a href="Tiny.mesh.Rope.html#_calculateBounds">_calculateBounds</a></li><li data-type='method'><a href="Tiny.mesh.Rope.html#_refresh">_refresh</a></li><li data-type='method'><a href="Tiny.mesh.Rope.html#containsPoint">containsPoint</a></li><li data-type='method'><a href="Tiny.mesh.Rope.html#destroy">destroy</a></li><li data-type='method'><a href="Tiny.mesh.Rope.html#multiplyUvs">multiplyUvs</a></li><li data-type='method'><a href="Tiny.mesh.Rope.html#refresh">refresh</a></li><li data-type='method'><a href="Tiny.mesh.Rope.html#refreshVertices">refreshVertices</a></li></ul></li><li><a href="Tiny.MeshRenderer.html">MeshRenderer</a></li></ul><h3>Externals</h3><ul><li><a href="external-Tiny.html">Tiny</a></li></ul><h3>Namespaces</h3><ul><li><a href="Tiny.mesh.html">mesh</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Plane.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import Mesh from './Mesh';
+
+/**
+ * The Plane allows you to draw a texture across several points and them manipulate these points
+ *
+ * @example
+ * var plane = new Tiny.mesh.Plane(Tiny.Texture.fromImage('snake.png'), 4, 4);
+ *
+ * @class
+ * @extends Tiny.mesh.Mesh
+ * @memberof Tiny.mesh
+ *
+ */
+class Plane extends Mesh {
+  /**
+   * @param {Tiny.Texture} texture - The texture to use on the Plane.
+   * @param {number} [verticesX=10] - The number of vertices in the x-axis
+   * @param {number} [verticesY=10] - The number of vertices in the y-axis
+   */
+  constructor(texture, verticesX, verticesY) {
+    super(texture);
+
+    /**
+     * Tracker for if the Plane is ready to be drawn. Needed because Mesh ctor can call _onTextureUpdated which could call refresh too early.
+     *
+     * @member {boolean}
+     * @private
+     */
+    this._ready = true;
+
+    this.verticesX = verticesX || 10;
+    this.verticesY = verticesY || 10;
+
+    this.drawMode = Mesh.DRAW_MODES.TRIANGLES;
+    this.refresh();
+  }
+
+  /**
+   * Refreshes plane coordinates
+   *
+   */
+  _refresh() {
+    const texture = this._texture;
+    const total = this.verticesX * this.verticesY;
+    const verts = [];
+    const colors = [];
+    const uvs = [];
+    const indices = [];
+
+    const segmentsX = this.verticesX - 1;
+    const segmentsY = this.verticesY - 1;
+
+    const sizeX = texture.width / segmentsX;
+    const sizeY = texture.height / segmentsY;
+
+    for (let i = 0; i &lt; total; i++) {
+      const x = (i % this.verticesX);
+      const y = ((i / this.verticesX) | 0);
+
+      verts.push(x * sizeX, y * sizeY);
+
+      uvs.push(x / segmentsX, y / segmentsY);
+    }
+
+    //  cons
+
+    const totalSub = segmentsX * segmentsY;
+
+    for (let i = 0; i &lt; totalSub; i++) {
+      const xpos = i % segmentsX;
+      const ypos = (i / segmentsX) | 0;
+
+      const value = (ypos * this.verticesX) + xpos;
+      const value2 = (ypos * this.verticesX) + xpos + 1;
+      const value3 = ((ypos + 1) * this.verticesX) + xpos;
+      const value4 = ((ypos + 1) * this.verticesX) + xpos + 1;
+
+      indices.push(value, value2, value3);
+      indices.push(value2, value4, value3);
+    }
+
+    // console.log(indices)
+    this.vertices = new Float32Array(verts);
+    this.uvs = new Float32Array(uvs);
+    this.colors = new Float32Array(colors);
+    this.indices = new Uint16Array(indices);
+
+    this.dirty++;
+    this.indexDirty++;
+
+    this.multiplyUvs();
+  }
+
+  /**
+   * Clear texture UVs when new texture is set
+   *
+   * @private
+   */
+  _onTextureUpdate() {
+    Mesh.prototype._onTextureUpdate.call(this);
+
+    // wait for the Plane ctor to finish before calling refresh
+    if (this._ready) {
+      this.refresh();
+    }
+  }
+}
+
+export default Plane;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jul 27 2021 16:14:24 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

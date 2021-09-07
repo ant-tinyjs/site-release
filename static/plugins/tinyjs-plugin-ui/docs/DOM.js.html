@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DOM.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Tiny.ui.Alert.html">Alert</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Alert.html#alert">alert</a></li></ul></li><li><a href="Tiny.ui.Button.html">Button</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Button.html#updatePosition">updatePosition</a></li></ul></li><li><a href="Tiny.ui.DOM.html">DOM</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.DOM.html#updateHTML">updateHTML</a></li></ul></li><li><a href="Tiny.ui.ImageNumber.html">ImageNumber</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.ImageNumber.html#create">create</a></li><li data-type='method'><a href="Tiny.ui.ImageNumber.html#update">update</a></li></ul></li><li><a href="Tiny.ui.InlineItems.html">InlineItems</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.InlineItems.html#deleteItem">deleteItem</a></li><li data-type='method'><a href="Tiny.ui.InlineItems.html#layout">layout</a></li><li data-type='method'><a href="Tiny.ui.InlineItems.html#spliceItems">spliceItems</a></li></ul></li><li><a href="Tiny.ui.InputBase.html">InputBase</a></li><li><a href="Tiny.ui.Label.html">Label</a></li><li><a href="Tiny.ui.NinePatch.html">NinePatch</a></li><li><a href="Tiny.ui.TiledText.html">TiledText</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.TiledText.html#create">create</a></li></ul></li><li><a href="Tiny.ui.Toast.html">Toast</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Toast.html#show">show</a></li></ul></li><li><a href="Tiny.ui.UIBase.html">UIBase</a></li><li><a href="TIny.ui.UISettings.html">UISettings</a></li></ul><h3>Externals</h3><ul><li><a href="external-Tiny.html">Tiny</a></li></ul><h3>Namespaces</h3><ul><li><a href="Tiny.ui.html">ui</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">DOM.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import UIBase from './UIBase';
+
+/**
+ * DOM 组件
+ *
+ * @description
+ * 注意：
+ * &lt;ul>
+ * &lt;li>由于安全策略，ui.DOM 的渲染模式只支持 canvas，如果要用，需要将固定设置启动参数 renderType 为 Tiny.RENDERER_TYPE.CANVAS&lt;/li>
+ * &lt;li>由于浏览器渲染机制问题，在Safari下，&lt;a href="http://tinyjs.net/#/plugins/tinyjs-plugin-tiling/docs">tinyjs-plugin-tiling&lt;/a>插件中的 TilingSprite 类会影响到 ui.DOM 的背景，可以通过添加顺序来规避（即后添加 TilingSprite 实例化显示对象）。&lt;/li>
+ * &lt;li>在低端设备上，初始化时可能会报错，此时应该使用`try..catch`捕获异常，并降级使用`Tiny.Text`或图片&lt;/li>
+ * &lt;/ul>
+ *
+ * @example
+ * // 写一段 HTML
+ * var html =
+ *  '&lt;div style="font-size:40px;color:#fff;">' +
+ *  ' I&lt;em> am &lt;/em>&lt;span style="color:gold;text-shadow:0 0 2px red;">Tiny.js&lt;/span>&lt;br/>你好，&lt;b style="color:gold;text-shadow:1px 5px 5px orangered;">中国&lt;/b>' +
+ *  '&lt;/div>';
+ * // 用上面的那段 HTML 生成 DOM 显示对象
+ * var dom = new Tiny.ui.DOM({
+ *  html: html,
+ * });
+ * var container = new Tiny.Container();
+ * // 将实例化的 dom 直接添加到显示容器中
+ * container.addChild(dom);
+ *
+ * @example
+ * // 使用自定义字体文件
+ * var html = '&lt;div style="font-family:AlipayNumber;font-size:30px;color:#fff">AlipayNumber 1234.56&lt;/div>';
+ * // 定义一个 base64 格式的字体
+ * // 字体文件转 base64：https://transfonter.org/
+ * var defs = `&lt;defs>&lt;style type="text/css">@font-face {font-family: AlipayNumber; src: url(data:application/font-woff;charset=utf-8;base64,d09GRg...);}&lt;/style>&lt;/defs>`;
+ * // 用上面的那段 HTML 生成 DOM 显示对象
+ * var dom = new Tiny.ui.DOM({
+ *  html: html,
+ *  defs: defs,
+ * });
+ *
+ * @class
+ * @extends Tiny.ui.UIBase
+ * @memberof Tiny.ui
+ */
+class DOM extends UIBase {
+  /**
+   *
+   * @param {object} options
+   * @param {string} [options.width] - 宽
+   * @param {string} [options.height] - 高
+   * @param {string} options.html - HTML 文本片段
+   * @param {string} options.defs - defs 文本片段
+   */
+  constructor(options) {
+    super();
+
+    Object.assign(this.setting, options);
+
+    const html = this.setting.html;
+    const defs = this.setting.defs;
+
+    this.sprite = null;
+    this._parseHTML(html, defs, false);
+  }
+
+  /**
+   * 更新 html
+   *
+   * @param {string} html - HTML 片段
+   * @param {string} defs - defs 片段
+   */
+  updateHTML(html, defs) {
+    this._parseHTML(html, defs, true);
+  }
+
+  _parseHTML(html, defs = '', isUpdate) {
+    const self = this;
+    const htmlHeightWidth = getHTMLWH(html);
+    const width = ~~this.setting.width || htmlHeightWidth.width;
+    const height = ~~this.setting.height || htmlHeightWidth.height;
+    const data = `
+    &lt;svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="${width}" height="${height}">
+      &lt;foreignObject width="100%" height="100%">
+        ${defs}
+        &lt;div xmlns="http://www.w3.org/1999/xhtml">${html}&lt;/div>
+      &lt;/foreignObject>
+    &lt;/svg>
+    `;
+    const svg = new Blob([data], { type: 'image/svg+xml;charset=utf-8' });
+    const reader = new FileReader();
+
+    reader.onload = function() {
+      const texture = Tiny.Texture.fromImage(this.result);
+      if (isUpdate) {
+        self.sprite.texture = texture;
+      } else {
+        self.sprite = new Tiny.Sprite(texture);
+        self.addChild(self.sprite);
+      }
+      self.sprite.texture.on('update', function() {
+        self.emit('rendered');
+      });
+    };
+    reader.readAsDataURL(svg);
+  }
+}
+
+/**
+ * 获取字符格式 HTML 的宽高
+ *
+ * @param {string} html
+ * @private
+ * @return {object}
+ */
+function getHTMLWH(html) {
+  const temp = document.createElement('template');
+  const span = document.createElement('span');
+  temp.innerHTML = html;
+  document.body.appendChild(span);
+  if (temp.content) {
+    span.appendChild(temp.content, span.lastElementChild);
+  } else {
+    span.insertAdjacentHTML('beforeend', html);
+  }
+  span.style.position = 'absolute';
+  span.style.zIndex = '-1';
+  span.style.display = 'block';
+  const whArray = getDomWH(span);
+  const result = {
+    width: whArray[0],
+    height: whArray[1],
+  };
+  span.parentNode.removeChild(span);
+  return result;
+}
+
+/**
+ *
+ * @param {HTMLElement} elem
+ * @private
+ * @return {array}
+ */
+function getDomWH(elem) {
+  let d;
+  let dims = [elem.offsetWidth, elem.offsetHeight];
+
+  if (!dims[0]) {
+    d = elem.style;
+    if (d.display === 'none') {
+      d.display = 'block';
+      dims = [elem.offsetWidth, elem.offsetHeight];
+      d.display = 'none';
+    } else if (d.display === '') {
+      d.display = 'block';
+      dims = [elem.offsetWidth, elem.offsetHeight];
+      d.display = '';
+    }
+  }
+  return dims;
+}
+
+export default DOM;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jul 27 2021 16:05:17 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>tinyjs-plugin-keyboard DEMO</title>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="yes" name="apple-touch-fullscreen"/>
+<meta content="telephone=no,email=no" name="format-detection"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+<style>
+html, body, p, div {margin:0;padding:0;}
+</style>
+</head>
+<body>
+
+<script src="https://gw.alipayobjects.com/os/lib/tinyjs/tiny/1.2.3/tiny.js"></script>
+<script src="../dist/index.debug.js"></script>
+
+<script type="text/javascript">
+  // 新建 App
+  var app = new Tiny.Application({
+    width: 400,
+    height: 400,
+    fixSize: true,
+  });
+  var txt = new Tiny.Text('请按下空格键，再松开', {
+    fill: 'white',
+  });
+  var keySpace = new Tiny.Keyboard(32);
+  keySpace.press = function (e) {
+    txt.text = 'space pressed!';
+  };
+  keySpace.release = function (e) {
+    txt.text = 'space released!';
+  };
+  app.run(txt);
+</script>
+</body>
+</html>

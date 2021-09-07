@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>core/PathConstraint.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Tiny.spine.Animation.html">Animation</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.Animation.html#.binarySearch">binarySearch</a></li><li data-type='method'><a href="Tiny.spine.Animation.html#.linearSearch">linearSearch</a></li><li data-type='method'><a href="Tiny.spine.Animation.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.Animation.html#hasTimeline">hasTimeline</a></li></ul></li><li><a href="Tiny.spine.AnimationState.html">AnimationState</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.AnimationState.html#addAnimation">addAnimation</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#addAnimationWith">addAnimationWith</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#addEmptyAnimation">addEmptyAnimation</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#addListener">addListener</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#applyMixingFrom">applyMixingFrom</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#applyRotateTimeline">applyRotateTimeline</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#clearListenerNotifications">clearListenerNotifications</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#clearListeners">clearListeners</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#clearTrack">clearTrack</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#clearTracks">clearTracks</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#computeHold">computeHold</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#computeNotLast">computeNotLast</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#disposeNext">disposeNext</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#expandToIndex">expandToIndex</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#getCurrent">getCurrent</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#hasAnimation">hasAnimation</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#queueEvents">queueEvents</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#removeListener">removeListener</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#setAnimation">setAnimation</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#setAnimationWith">setAnimationWith</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#setCurrent">setCurrent</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#setEmptyAnimation">setEmptyAnimation</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#setEmptyAnimations">setEmptyAnimations</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#trackEntry">trackEntry</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#update">update</a></li><li data-type='method'><a href="Tiny.spine.AnimationState.html#updateMixingFrom">updateMixingFrom</a></li></ul></li><li><a href="Tiny.spine.AnimationStateAdapter.html">AnimationStateAdapter</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.AnimationStateAdapter.html#complete">complete</a></li><li data-type='method'><a href="Tiny.spine.AnimationStateAdapter.html#dispose">dispose</a></li><li data-type='method'><a href="Tiny.spine.AnimationStateAdapter.html#end">end</a></li><li data-type='method'><a href="Tiny.spine.AnimationStateAdapter.html#event">event</a></li><li data-type='method'><a href="Tiny.spine.AnimationStateAdapter.html#interrupt">interrupt</a></li><li data-type='method'><a href="Tiny.spine.AnimationStateAdapter.html#start">start</a></li></ul></li><li><a href="Tiny.spine.AnimationStateData.html">AnimationStateData</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.AnimationStateData.html#getMix">getMix</a></li><li data-type='method'><a href="Tiny.spine.AnimationStateData.html#setMix">setMix</a></li><li data-type='method'><a href="Tiny.spine.AnimationStateData.html#setMixWith">setMixWith</a></li></ul></li><li><a href="Tiny.spine.AtlasAttachmentLoader.html">AtlasAttachmentLoader</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.AtlasAttachmentLoader.html#newBoundingBoxAttachment">newBoundingBoxAttachment</a></li><li data-type='method'><a href="Tiny.spine.AtlasAttachmentLoader.html#newClippingAttachment">newClippingAttachment</a></li><li data-type='method'><a href="Tiny.spine.AtlasAttachmentLoader.html#newMeshAttachment">newMeshAttachment</a></li><li data-type='method'><a href="Tiny.spine.AtlasAttachmentLoader.html#newPathAttachment">newPathAttachment</a></li><li data-type='method'><a href="Tiny.spine.AtlasAttachmentLoader.html#newPointAttachment">newPointAttachment</a></li><li data-type='method'><a href="Tiny.spine.AtlasAttachmentLoader.html#newRegionAttachment">newRegionAttachment</a></li></ul></li><li><a href="Tiny.spine.Attachment.html">Attachment</a></li><li><a href="Tiny.spine.AttachmentTimeline.html">AttachmentTimeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.AttachmentTimeline.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.AttachmentTimeline.html#getFrameCount">getFrameCount</a></li><li data-type='method'><a href="Tiny.spine.AttachmentTimeline.html#getPropertyId">getPropertyId</a></li><li data-type='method'><a href="Tiny.spine.AttachmentTimeline.html#setFrame">setFrame</a></li></ul></li><li><a href="Tiny.spine.Bone.html">Bone</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.Bone.html#getWorldRotationX">getWorldRotationX</a></li><li data-type='method'><a href="Tiny.spine.Bone.html#getWorldRotationY">getWorldRotationY</a></li><li data-type='method'><a href="Tiny.spine.Bone.html#getWorldScaleX">getWorldScaleX</a></li><li data-type='method'><a href="Tiny.spine.Bone.html#getWorldScaleY">getWorldScaleY</a></li><li data-type='method'><a href="Tiny.spine.Bone.html#isActive">isActive</a></li><li data-type='method'><a href="Tiny.spine.Bone.html#localToWorld">localToWorld</a></li><li data-type='method'><a href="Tiny.spine.Bone.html#localToWorldRotation">localToWorldRotation</a></li><li data-type='method'><a href="Tiny.spine.Bone.html#rotateWorld">rotateWorld</a></li><li data-type='method'><a href="Tiny.spine.Bone.html#setToSetupPose">setToSetupPose</a></li><li data-type='method'><a href="Tiny.spine.Bone.html#update">update</a></li><li data-type='method'><a href="Tiny.spine.Bone.html#updateAppliedTransform">updateAppliedTransform</a></li><li data-type='method'><a href="Tiny.spine.Bone.html#updateWorldTransform">updateWorldTransform</a></li><li data-type='method'><a href="Tiny.spine.Bone.html#updateWorldTransformWith">updateWorldTransformWith</a></li><li data-type='method'><a href="Tiny.spine.Bone.html#worldToLocal">worldToLocal</a></li><li data-type='method'><a href="Tiny.spine.Bone.html#worldToLocalRotation">worldToLocalRotation</a></li></ul></li><li><a href="Tiny.spine.BoneData.html">BoneData</a></li><li><a href="Tiny.spine.BoundingBoxAttachment.html">BoundingBoxAttachment</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.BoundingBoxAttachment.html#copy">copy</a></li></ul></li><li><a href="Tiny.spine.ClippingAttachment.html">ClippingAttachment</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.ClippingAttachment.html#computeWorldVertices">computeWorldVertices</a></li><li data-type='method'><a href="Tiny.spine.ClippingAttachment.html#copy">copy</a></li><li data-type='method'><a href="Tiny.spine.ClippingAttachment.html#copyTo">copyTo</a></li></ul></li><li><a href="Tiny.spine.Color.html">Color</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.Color.html#.rgb888ToColor">rgb888ToColor</a></li><li data-type='method'><a href="Tiny.spine.Color.html#.rgba8888ToColor">rgba8888ToColor</a></li><li data-type='method'><a href="Tiny.spine.Color.html#add">add</a></li><li data-type='method'><a href="Tiny.spine.Color.html#clamp">clamp</a></li><li data-type='method'><a href="Tiny.spine.Color.html#set">set</a></li><li data-type='method'><a href="Tiny.spine.Color.html#setFromColor">setFromColor</a></li><li data-type='method'><a href="Tiny.spine.Color.html#setFromString">setFromString</a></li></ul></li><li><a href="Tiny.spine.ColorTimeline.html">ColorTimeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.ColorTimeline.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.ColorTimeline.html#getCurvePercent">getCurvePercent</a></li><li data-type='method'><a href="Tiny.spine.ColorTimeline.html#getCurveType">getCurveType</a></li><li data-type='method'><a href="Tiny.spine.ColorTimeline.html#getFrameCount">getFrameCount</a></li><li data-type='method'><a href="Tiny.spine.ColorTimeline.html#getPropertyId">getPropertyId</a></li><li data-type='method'><a href="Tiny.spine.ColorTimeline.html#setCurve">setCurve</a></li><li data-type='method'><a href="Tiny.spine.ColorTimeline.html#setFrame">setFrame</a></li><li data-type='method'><a href="Tiny.spine.ColorTimeline.html#setLinear">setLinear</a></li><li data-type='method'><a href="Tiny.spine.ColorTimeline.html#setStepped">setStepped</a></li></ul></li><li><a href="Tiny.spine.ConstraintData.html">ConstraintData</a></li><li><a href="Tiny.spine.CurveTimeline.html">CurveTimeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.CurveTimeline.html#getCurvePercent">getCurvePercent</a></li><li data-type='method'><a href="Tiny.spine.CurveTimeline.html#getCurveType">getCurveType</a></li><li data-type='method'><a href="Tiny.spine.CurveTimeline.html#getFrameCount">getFrameCount</a></li><li data-type='method'><a href="Tiny.spine.CurveTimeline.html#setCurve">setCurve</a></li><li data-type='method'><a href="Tiny.spine.CurveTimeline.html#setLinear">setLinear</a></li><li data-type='method'><a href="Tiny.spine.CurveTimeline.html#setStepped">setStepped</a></li></ul></li><li><a href="Tiny.spine.Debugger.html">Debugger</a></li><li><a href="Tiny.spine.DeformTimeline.html">DeformTimeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.DeformTimeline.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.DeformTimeline.html#getCurvePercent">getCurvePercent</a></li><li data-type='method'><a href="Tiny.spine.DeformTimeline.html#getCurveType">getCurveType</a></li><li data-type='method'><a href="Tiny.spine.DeformTimeline.html#getFrameCount">getFrameCount</a></li><li data-type='method'><a href="Tiny.spine.DeformTimeline.html#getPropertyId">getPropertyId</a></li><li data-type='method'><a href="Tiny.spine.DeformTimeline.html#setCurve">setCurve</a></li><li data-type='method'><a href="Tiny.spine.DeformTimeline.html#setFrame">setFrame</a></li><li data-type='method'><a href="Tiny.spine.DeformTimeline.html#setLinear">setLinear</a></li><li data-type='method'><a href="Tiny.spine.DeformTimeline.html#setStepped">setStepped</a></li></ul></li><li><a href="Tiny.spine.DrawOrderTimeline.html">DrawOrderTimeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.DrawOrderTimeline.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.DrawOrderTimeline.html#getFrameCount">getFrameCount</a></li><li data-type='method'><a href="Tiny.spine.DrawOrderTimeline.html#getPropertyId">getPropertyId</a></li><li data-type='method'><a href="Tiny.spine.DrawOrderTimeline.html#setFrame">setFrame</a></li></ul></li><li><a href="Tiny.spine.Event.html">Event</a></li><li><a href="Tiny.spine.EventData.html">EventData</a></li><li><a href="Tiny.spine.EventQueue.html">EventQueue</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.EventQueue.html#clear">clear</a></li><li data-type='method'><a href="Tiny.spine.EventQueue.html#complete">complete</a></li><li data-type='method'><a href="Tiny.spine.EventQueue.html#dispose">dispose</a></li><li data-type='method'><a href="Tiny.spine.EventQueue.html#drain">drain</a></li><li data-type='method'><a href="Tiny.spine.EventQueue.html#end">end</a></li><li data-type='method'><a href="Tiny.spine.EventQueue.html#event">event</a></li><li data-type='method'><a href="Tiny.spine.EventQueue.html#interrupt">interrupt</a></li><li data-type='method'><a href="Tiny.spine.EventQueue.html#start">start</a></li></ul></li><li><a href="Tiny.spine.EventTimeline.html">EventTimeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.EventTimeline.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.EventTimeline.html#getFrameCount">getFrameCount</a></li><li data-type='method'><a href="Tiny.spine.EventTimeline.html#getPropertyId">getPropertyId</a></li><li data-type='method'><a href="Tiny.spine.EventTimeline.html#setFrame">setFrame</a></li></ul></li><li><a href="Tiny.spine.IKConstraint.html">IKConstraint</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.IKConstraint.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.IKConstraint.html#apply1">apply1</a></li><li data-type='method'><a href="Tiny.spine.IKConstraint.html#apply2">apply2</a></li><li data-type='method'><a href="Tiny.spine.IKConstraint.html#isActive">isActive</a></li><li data-type='method'><a href="Tiny.spine.IKConstraint.html#update">update</a></li></ul></li><li><a href="Tiny.spine.IKConstraintData.html">IKConstraintData</a></li><li><a href="Tiny.spine.IKConstraintTimeline.html">IKConstraintTimeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.IKConstraintTimeline.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.IKConstraintTimeline.html#getCurvePercent">getCurvePercent</a></li><li data-type='method'><a href="Tiny.spine.IKConstraintTimeline.html#getCurveType">getCurveType</a></li><li data-type='method'><a href="Tiny.spine.IKConstraintTimeline.html#getFrameCount">getFrameCount</a></li><li data-type='method'><a href="Tiny.spine.IKConstraintTimeline.html#getPropertyId">getPropertyId</a></li><li data-type='method'><a href="Tiny.spine.IKConstraintTimeline.html#setCurve">setCurve</a></li><li data-type='method'><a href="Tiny.spine.IKConstraintTimeline.html#setFrame">setFrame</a></li><li data-type='method'><a href="Tiny.spine.IKConstraintTimeline.html#setLinear">setLinear</a></li><li data-type='method'><a href="Tiny.spine.IKConstraintTimeline.html#setStepped">setStepped</a></li></ul></li><li><a href="Tiny.spine.IntSet.html">IntSet</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.IntSet.html#add">add</a></li><li data-type='method'><a href="Tiny.spine.IntSet.html#clear">clear</a></li><li data-type='method'><a href="Tiny.spine.IntSet.html#contains">contains</a></li><li data-type='method'><a href="Tiny.spine.IntSet.html#remove">remove</a></li></ul></li><li><a href="Tiny.spine.JitterEffect.html">JitterEffect</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.JitterEffect.html#begin">begin</a></li><li data-type='method'><a href="Tiny.spine.JitterEffect.html#end">end</a></li><li data-type='method'><a href="Tiny.spine.JitterEffect.html#transform">transform</a></li></ul></li><li><a href="Tiny.spine.MeshAttachment.html">MeshAttachment</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.MeshAttachment.html#computeWorldVertices">computeWorldVertices</a></li><li data-type='method'><a href="Tiny.spine.MeshAttachment.html#copy">copy</a></li><li data-type='method'><a href="Tiny.spine.MeshAttachment.html#copyTo">copyTo</a></li><li data-type='method'><a href="Tiny.spine.MeshAttachment.html#getParentMesh">getParentMesh</a></li><li data-type='method'><a href="Tiny.spine.MeshAttachment.html#newLinkedMesh">newLinkedMesh</a></li><li data-type='method'><a href="Tiny.spine.MeshAttachment.html#setParentMesh">setParentMesh</a></li><li data-type='method'><a href="Tiny.spine.MeshAttachment.html#updateUVs">updateUVs</a></li></ul></li><li><a href="Tiny.spine.PathAttachment.html">PathAttachment</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.PathAttachment.html#computeWorldVertices">computeWorldVertices</a></li><li data-type='method'><a href="Tiny.spine.PathAttachment.html#copy">copy</a></li><li data-type='method'><a href="Tiny.spine.PathAttachment.html#copyTo">copyTo</a></li></ul></li><li><a href="Tiny.spine.PathConstraint.html">PathConstraint</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.PathConstraint.html#addAfterPosition">addAfterPosition</a></li><li data-type='method'><a href="Tiny.spine.PathConstraint.html#addBeforePosition">addBeforePosition</a></li><li data-type='method'><a href="Tiny.spine.PathConstraint.html#addCurvePosition">addCurvePosition</a></li><li data-type='method'><a href="Tiny.spine.PathConstraint.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.PathConstraint.html#computeWorldPositions">computeWorldPositions</a></li><li data-type='method'><a href="Tiny.spine.PathConstraint.html#isActive">isActive</a></li><li data-type='method'><a href="Tiny.spine.PathConstraint.html#update">update</a></li></ul></li><li><a href="Tiny.spine.PathConstraintData.html">PathConstraintData</a></li><li><a href="Tiny.spine.PathConstraintMixTimeline.html">PathConstraintMixTimeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.PathConstraintMixTimeline.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintMixTimeline.html#getCurvePercent">getCurvePercent</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintMixTimeline.html#getCurveType">getCurveType</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintMixTimeline.html#getFrameCount">getFrameCount</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintMixTimeline.html#getPropertyId">getPropertyId</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintMixTimeline.html#setCurve">setCurve</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintMixTimeline.html#setFrame">setFrame</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintMixTimeline.html#setLinear">setLinear</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintMixTimeline.html#setStepped">setStepped</a></li></ul></li><li><a href="Tiny.spine.PathConstraintPositionTimeline.html">PathConstraintPositionTimeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.PathConstraintPositionTimeline.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintPositionTimeline.html#getCurvePercent">getCurvePercent</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintPositionTimeline.html#getCurveType">getCurveType</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintPositionTimeline.html#getFrameCount">getFrameCount</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintPositionTimeline.html#getPropertyId">getPropertyId</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintPositionTimeline.html#setCurve">setCurve</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintPositionTimeline.html#setFrame">setFrame</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintPositionTimeline.html#setLinear">setLinear</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintPositionTimeline.html#setStepped">setStepped</a></li></ul></li><li><a href="Tiny.spine.PathConstraintSpacingTimeline.html">PathConstraintSpacingTimeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.PathConstraintSpacingTimeline.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintSpacingTimeline.html#getCurvePercent">getCurvePercent</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintSpacingTimeline.html#getCurveType">getCurveType</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintSpacingTimeline.html#getFrameCount">getFrameCount</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintSpacingTimeline.html#getPropertyId">getPropertyId</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintSpacingTimeline.html#setCurve">setCurve</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintSpacingTimeline.html#setFrame">setFrame</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintSpacingTimeline.html#setLinear">setLinear</a></li><li data-type='method'><a href="Tiny.spine.PathConstraintSpacingTimeline.html#setStepped">setStepped</a></li></ul></li><li><a href="Tiny.spine.PointAttachment.html">PointAttachment</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.PointAttachment.html#computeWorldPosition">computeWorldPosition</a></li><li data-type='method'><a href="Tiny.spine.PointAttachment.html#computeWorldRotation">computeWorldRotation</a></li><li data-type='method'><a href="Tiny.spine.PointAttachment.html#computeWorldVertices">computeWorldVertices</a></li><li data-type='method'><a href="Tiny.spine.PointAttachment.html#copy">copy</a></li><li data-type='method'><a href="Tiny.spine.PointAttachment.html#copyTo">copyTo</a></li></ul></li><li><a href="Tiny.spine.Pool.html">Pool</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.Pool.html#clear">clear</a></li><li data-type='method'><a href="Tiny.spine.Pool.html#free">free</a></li><li data-type='method'><a href="Tiny.spine.Pool.html#freeAll">freeAll</a></li><li data-type='method'><a href="Tiny.spine.Pool.html#obtain">obtain</a></li></ul></li><li><a href="Tiny.spine.Pow.html">Pow</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.Pow.html#applyInternal">applyInternal</a></li></ul></li><li><a href="Tiny.spine.PowOut.html">PowOut</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.PowOut.html#applyInternal">applyInternal</a></li></ul></li><li><a href="Tiny.spine.RegionAttachment.html">RegionAttachment</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.RegionAttachment.html#computeWorldVertices">computeWorldVertices</a></li><li data-type='method'><a href="Tiny.spine.RegionAttachment.html#copy">copy</a></li><li data-type='method'><a href="Tiny.spine.RegionAttachment.html#setRegion">setRegion</a></li><li data-type='method'><a href="Tiny.spine.RegionAttachment.html#updateOffset">updateOffset</a></li></ul></li><li><a href="Tiny.spine.RotateTimeline.html">RotateTimeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.RotateTimeline.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.RotateTimeline.html#getCurvePercent">getCurvePercent</a></li><li data-type='method'><a href="Tiny.spine.RotateTimeline.html#getCurveType">getCurveType</a></li><li data-type='method'><a href="Tiny.spine.RotateTimeline.html#getFrameCount">getFrameCount</a></li><li data-type='method'><a href="Tiny.spine.RotateTimeline.html#getPropertyId">getPropertyId</a></li><li data-type='method'><a href="Tiny.spine.RotateTimeline.html#setCurve">setCurve</a></li><li data-type='method'><a href="Tiny.spine.RotateTimeline.html#setFrame">setFrame</a></li><li data-type='method'><a href="Tiny.spine.RotateTimeline.html#setLinear">setLinear</a></li><li data-type='method'><a href="Tiny.spine.RotateTimeline.html#setStepped">setStepped</a></li></ul></li><li><a href="Tiny.spine.ScaleTimeline.html">ScaleTimeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.ScaleTimeline.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.ScaleTimeline.html#getCurvePercent">getCurvePercent</a></li><li data-type='method'><a href="Tiny.spine.ScaleTimeline.html#getCurveType">getCurveType</a></li><li data-type='method'><a href="Tiny.spine.ScaleTimeline.html#getFrameCount">getFrameCount</a></li><li data-type='method'><a href="Tiny.spine.ScaleTimeline.html#getPropertyId">getPropertyId</a></li><li data-type='method'><a href="Tiny.spine.ScaleTimeline.html#setCurve">setCurve</a></li><li data-type='method'><a href="Tiny.spine.ScaleTimeline.html#setFrame">setFrame</a></li><li data-type='method'><a href="Tiny.spine.ScaleTimeline.html#setLinear">setLinear</a></li><li data-type='method'><a href="Tiny.spine.ScaleTimeline.html#setStepped">setStepped</a></li></ul></li><li><a href="Tiny.spine.ShearTimeline.html">ShearTimeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.ShearTimeline.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.ShearTimeline.html#getCurvePercent">getCurvePercent</a></li><li data-type='method'><a href="Tiny.spine.ShearTimeline.html#getCurveType">getCurveType</a></li><li data-type='method'><a href="Tiny.spine.ShearTimeline.html#getFrameCount">getFrameCount</a></li><li data-type='method'><a href="Tiny.spine.ShearTimeline.html#getPropertyId">getPropertyId</a></li><li data-type='method'><a href="Tiny.spine.ShearTimeline.html#setCurve">setCurve</a></li><li data-type='method'><a href="Tiny.spine.ShearTimeline.html#setFrame">setFrame</a></li><li data-type='method'><a href="Tiny.spine.ShearTimeline.html#setLinear">setLinear</a></li><li data-type='method'><a href="Tiny.spine.ShearTimeline.html#setStepped">setStepped</a></li></ul></li><li><a href="Tiny.spine.Skeleton.html">Skeleton</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.Skeleton.html#findBone">findBone</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#findBoneIndex">findBoneIndex</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#findIKConstraint">findIKConstraint</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#findPathConstraint">findPathConstraint</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#findSlot">findSlot</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#findSlotIndex">findSlotIndex</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#findTransformConstraint">findTransformConstraint</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#getAttachment">getAttachment</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#getAttachmentByName">getAttachmentByName</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#getBounds">getBounds</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#getRootBone">getRootBone</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#setAttachment">setAttachment</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#setBonesToSetupPose">setBonesToSetupPose</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#setSkin">setSkin</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#setSkinByName">setSkinByName</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#setSlotsToSetupPose">setSlotsToSetupPose</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#setToSetupPose">setToSetupPose</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#sortBone">sortBone</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#sortIKConstraint">sortIKConstraint</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#sortPathConstraint">sortPathConstraint</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#sortPathConstraintAttachment">sortPathConstraintAttachment</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#sortPathConstraintAttachmentWith">sortPathConstraintAttachmentWith</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#sortReset">sortReset</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#sortTransformConstraint">sortTransformConstraint</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#update">update</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#updateCache">updateCache</a></li><li data-type='method'><a href="Tiny.spine.Skeleton.html#updateWorldTransform">updateWorldTransform</a></li></ul></li><li><a href="Tiny.spine.SkeletonBinary.html">SkeletonBinary</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.SkeletonBinary.html#readSkeletonData">readSkeletonData</a></li><li data-type='method'><a href="Tiny.spine.SkeletonBinary.html#setCurve">setCurve</a></li></ul></li><li><a href="Tiny.spine.SkeletonBounds.html">SkeletonBounds</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.SkeletonBounds.html#aabbCompute">aabbCompute</a></li><li data-type='method'><a href="Tiny.spine.SkeletonBounds.html#aabbContainsPoint">aabbContainsPoint</a></li><li data-type='method'><a href="Tiny.spine.SkeletonBounds.html#aabbIntersectsSegment">aabbIntersectsSegment</a></li><li data-type='method'><a href="Tiny.spine.SkeletonBounds.html#aabbIntersectsSkeleton">aabbIntersectsSkeleton</a></li><li data-type='method'><a href="Tiny.spine.SkeletonBounds.html#containsPoint">containsPoint</a></li><li data-type='method'><a href="Tiny.spine.SkeletonBounds.html#containsPointPolygon">containsPointPolygon</a></li><li data-type='method'><a href="Tiny.spine.SkeletonBounds.html#getHeight">getHeight</a></li><li data-type='method'><a href="Tiny.spine.SkeletonBounds.html#getPolygon">getPolygon</a></li><li data-type='method'><a href="Tiny.spine.SkeletonBounds.html#getWidth">getWidth</a></li><li data-type='method'><a href="Tiny.spine.SkeletonBounds.html#intersectsSegment">intersectsSegment</a></li><li data-type='method'><a href="Tiny.spine.SkeletonBounds.html#intersectsSegmentPolygon">intersectsSegmentPolygon</a></li><li data-type='method'><a href="Tiny.spine.SkeletonBounds.html#update">update</a></li></ul></li><li><a href="Tiny.spine.SkeletonClipping.html">SkeletonClipping</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.SkeletonClipping.html#.makeClockwise">makeClockwise</a></li><li data-type='method'><a href="Tiny.spine.SkeletonClipping.html#clip">clip</a></li><li data-type='method'><a href="Tiny.spine.SkeletonClipping.html#clipEnd">clipEnd</a></li><li data-type='method'><a href="Tiny.spine.SkeletonClipping.html#clipEndWithSlot">clipEndWithSlot</a></li><li data-type='method'><a href="Tiny.spine.SkeletonClipping.html#clipStart">clipStart</a></li><li data-type='method'><a href="Tiny.spine.SkeletonClipping.html#clipTriangles">clipTriangles</a></li><li data-type='method'><a href="Tiny.spine.SkeletonClipping.html#isClipping">isClipping</a></li></ul></li><li><a href="Tiny.spine.SkeletonData.html">SkeletonData</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.SkeletonData.html#findAnimation">findAnimation</a></li><li data-type='method'><a href="Tiny.spine.SkeletonData.html#findBone">findBone</a></li><li data-type='method'><a href="Tiny.spine.SkeletonData.html#findBoneIndex">findBoneIndex</a></li><li data-type='method'><a href="Tiny.spine.SkeletonData.html#findEvent">findEvent</a></li><li data-type='method'><a href="Tiny.spine.SkeletonData.html#findIKConstraint">findIKConstraint</a></li><li data-type='method'><a href="Tiny.spine.SkeletonData.html#findPathConstraint">findPathConstraint</a></li><li data-type='method'><a href="Tiny.spine.SkeletonData.html#findPathConstraintIndex">findPathConstraintIndex</a></li><li data-type='method'><a href="Tiny.spine.SkeletonData.html#findSkin">findSkin</a></li><li data-type='method'><a href="Tiny.spine.SkeletonData.html#findSlot">findSlot</a></li><li data-type='method'><a href="Tiny.spine.SkeletonData.html#findSlotIndex">findSlotIndex</a></li><li data-type='method'><a href="Tiny.spine.SkeletonData.html#findTransformConstraint">findTransformConstraint</a></li></ul></li><li><a href="Tiny.spine.SkeletonJSON.html">SkeletonJSON</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.SkeletonJSON.html#.blendModeFromString">blendModeFromString</a></li><li data-type='method'><a href="Tiny.spine.SkeletonJSON.html#.positionModeFromString">positionModeFromString</a></li><li data-type='method'><a href="Tiny.spine.SkeletonJSON.html#.rotateModeFromString">rotateModeFromString</a></li><li data-type='method'><a href="Tiny.spine.SkeletonJSON.html#.spacingModeFromString">spacingModeFromString</a></li><li data-type='method'><a href="Tiny.spine.SkeletonJSON.html#.transformModeFromString">transformModeFromString</a></li><li data-type='method'><a href="Tiny.spine.SkeletonJSON.html#getValue">getValue</a></li><li data-type='method'><a href="Tiny.spine.SkeletonJSON.html#readAnimation">readAnimation</a></li><li data-type='method'><a href="Tiny.spine.SkeletonJSON.html#readAttachment">readAttachment</a></li><li data-type='method'><a href="Tiny.spine.SkeletonJSON.html#readCurve">readCurve</a></li><li data-type='method'><a href="Tiny.spine.SkeletonJSON.html#readSkeletonData">readSkeletonData</a></li><li data-type='method'><a href="Tiny.spine.SkeletonJSON.html#readVertices">readVertices</a></li></ul></li><li><a href="Tiny.spine.Skin.html">Skin</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.Skin.html#addSkin">addSkin</a></li><li data-type='method'><a href="Tiny.spine.Skin.html#attachAll">attachAll</a></li><li data-type='method'><a href="Tiny.spine.Skin.html#clear">clear</a></li><li data-type='method'><a href="Tiny.spine.Skin.html#copySkin">copySkin</a></li><li data-type='method'><a href="Tiny.spine.Skin.html#getAttachment">getAttachment</a></li><li data-type='method'><a href="Tiny.spine.Skin.html#getAttachments">getAttachments</a></li><li data-type='method'><a href="Tiny.spine.Skin.html#getAttachmentsForSlot">getAttachmentsForSlot</a></li><li data-type='method'><a href="Tiny.spine.Skin.html#removeAttachment">removeAttachment</a></li><li data-type='method'><a href="Tiny.spine.Skin.html#setAttachment">setAttachment</a></li></ul></li><li><a href="Tiny.spine.SkinEntry.html">SkinEntry</a></li><li><a href="Tiny.spine.Slot.html">Slot</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.Slot.html#getAttachment">getAttachment</a></li><li data-type='method'><a href="Tiny.spine.Slot.html#getAttachmentTime">getAttachmentTime</a></li><li data-type='method'><a href="Tiny.spine.Slot.html#setAttachment">setAttachment</a></li><li data-type='method'><a href="Tiny.spine.Slot.html#setAttachmentTime">setAttachmentTime</a></li><li data-type='method'><a href="Tiny.spine.Slot.html#setToSetupPose">setToSetupPose</a></li></ul></li><li><a href="Tiny.spine.SlotData.html">SlotData</a></li><li><a href="Tiny.spine.Spine.html">Spine</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.Spine.html#createGraphics">createGraphics</a></li><li data-type='method'><a href="Tiny.spine.Spine.html#destroy">destroy</a></li><li data-type='method'><a href="Tiny.spine.Spine.html#hackAttachmentGroups">hackAttachmentGroups</a></li><li data-type='method'><a href="Tiny.spine.Spine.html#hackTextureBySlotIndex">hackTextureBySlotIndex</a></li><li data-type='method'><a href="Tiny.spine.Spine.html#hackTextureBySlotName">hackTextureBySlotName</a></li><li data-type='method'><a href="Tiny.spine.Spine.html#newContainer">newContainer</a></li><li data-type='method'><a href="Tiny.spine.Spine.html#newGraphics">newGraphics</a></li><li data-type='method'><a href="Tiny.spine.Spine.html#newMesh">newMesh</a></li><li data-type='method'><a href="Tiny.spine.Spine.html#newSprite">newSprite</a></li><li data-type='method'><a href="Tiny.spine.Spine.html#transformHack">transformHack</a></li><li data-type='method'><a href="Tiny.spine.Spine.html#update">update</a></li><li data-type='method'><a href="Tiny.spine.Spine.html#updateGraphics">updateGraphics</a></li></ul></li><li><a href="Tiny.spine.SpineMesh.html">SpineMesh</a></li><li><a href="Tiny.spine.SpineSprite.html">SpineSprite</a></li><li><a href="Tiny.spine.SwirlEffect.html">SwirlEffect</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.SwirlEffect.html#begin">begin</a></li><li data-type='method'><a href="Tiny.spine.SwirlEffect.html#end">end</a></li><li data-type='method'><a href="Tiny.spine.SwirlEffect.html#transform">transform</a></li></ul></li><li><a href="Tiny.spine.Texture.html">Texture</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.Texture.html#.filterFromString">filterFromString</a></li><li data-type='method'><a href="Tiny.spine.Texture.html#.wrapFromString">wrapFromString</a></li><li data-type='method'><a href="Tiny.spine.Texture.html#dispose">dispose</a></li><li data-type='method'><a href="Tiny.spine.Texture.html#getImage">getImage</a></li><li data-type='method'><a href="Tiny.spine.Texture.html#setFilters">setFilters</a></li><li data-type='method'><a href="Tiny.spine.Texture.html#setWraps">setWraps</a></li></ul></li><li><a href="Tiny.spine.TextureAtlas.html">TextureAtlas</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.TextureAtlas.html#addSpineAtlas">addSpineAtlas</a></li><li data-type='method'><a href="Tiny.spine.TextureAtlas.html#addTexture">addTexture</a></li><li data-type='method'><a href="Tiny.spine.TextureAtlas.html#addTextureHash">addTextureHash</a></li><li data-type='method'><a href="Tiny.spine.TextureAtlas.html#dispose">dispose</a></li><li data-type='method'><a href="Tiny.spine.TextureAtlas.html#findRegion">findRegion</a></li></ul></li><li><a href="Tiny.spine.TextureAtlasPage.html">TextureAtlasPage</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.TextureAtlasPage.html#setFilters">setFilters</a></li></ul></li><li><a href="Tiny.spine.TextureAtlasRegion.html">TextureAtlasRegion</a></li><li><a href="Tiny.spine.TextureRegion.html">TextureRegion</a></li><li><a href="Tiny.spine.TrackEntry.html">TrackEntry</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.TrackEntry.html#getAnimationTime">getAnimationTime</a></li><li data-type='method'><a href="Tiny.spine.TrackEntry.html#isComplete">isComplete</a></li><li data-type='method'><a href="Tiny.spine.TrackEntry.html#loopsCount">loopsCount</a></li><li data-type='method'><a href="Tiny.spine.TrackEntry.html#reset">reset</a></li><li data-type='method'><a href="Tiny.spine.TrackEntry.html#resetRotationDirections">resetRotationDirections</a></li><li data-type='method'><a href="Tiny.spine.TrackEntry.html#setAnimationLast">setAnimationLast</a></li></ul></li><li><a href="Tiny.spine.TransformConstraint.html">TransformConstraint</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.TransformConstraint.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.TransformConstraint.html#applyAbsoluteLocal">applyAbsoluteLocal</a></li><li data-type='method'><a href="Tiny.spine.TransformConstraint.html#applyAbsoluteWorld">applyAbsoluteWorld</a></li><li data-type='method'><a href="Tiny.spine.TransformConstraint.html#applyRelativeLocal">applyRelativeLocal</a></li><li data-type='method'><a href="Tiny.spine.TransformConstraint.html#applyRelativeWorld">applyRelativeWorld</a></li><li data-type='method'><a href="Tiny.spine.TransformConstraint.html#isActive">isActive</a></li><li data-type='method'><a href="Tiny.spine.TransformConstraint.html#update">update</a></li></ul></li><li><a href="Tiny.spine.TransformConstraintData.html">TransformConstraintData</a></li><li><a href="Tiny.spine.TransformConstraintTimeline.html">TransformConstraintTimeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.TransformConstraintTimeline.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.TransformConstraintTimeline.html#getCurvePercent">getCurvePercent</a></li><li data-type='method'><a href="Tiny.spine.TransformConstraintTimeline.html#getCurveType">getCurveType</a></li><li data-type='method'><a href="Tiny.spine.TransformConstraintTimeline.html#getFrameCount">getFrameCount</a></li><li data-type='method'><a href="Tiny.spine.TransformConstraintTimeline.html#getPropertyId">getPropertyId</a></li><li data-type='method'><a href="Tiny.spine.TransformConstraintTimeline.html#setCurve">setCurve</a></li><li data-type='method'><a href="Tiny.spine.TransformConstraintTimeline.html#setFrame">setFrame</a></li><li data-type='method'><a href="Tiny.spine.TransformConstraintTimeline.html#setLinear">setLinear</a></li><li data-type='method'><a href="Tiny.spine.TransformConstraintTimeline.html#setStepped">setStepped</a></li></ul></li><li><a href="Tiny.spine.TranslateTimeline.html">TranslateTimeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.TranslateTimeline.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.TranslateTimeline.html#getCurvePercent">getCurvePercent</a></li><li data-type='method'><a href="Tiny.spine.TranslateTimeline.html#getCurveType">getCurveType</a></li><li data-type='method'><a href="Tiny.spine.TranslateTimeline.html#getFrameCount">getFrameCount</a></li><li data-type='method'><a href="Tiny.spine.TranslateTimeline.html#getPropertyId">getPropertyId</a></li><li data-type='method'><a href="Tiny.spine.TranslateTimeline.html#setCurve">setCurve</a></li><li data-type='method'><a href="Tiny.spine.TranslateTimeline.html#setFrame">setFrame</a></li><li data-type='method'><a href="Tiny.spine.TranslateTimeline.html#setLinear">setLinear</a></li><li data-type='method'><a href="Tiny.spine.TranslateTimeline.html#setStepped">setStepped</a></li></ul></li><li><a href="Tiny.spine.Triangulator.html">Triangulator</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.Triangulator.html#decompose">decompose</a></li><li data-type='method'><a href="Tiny.spine.Triangulator.html#triangulate">triangulate</a></li></ul></li><li><a href="Tiny.spine.TwoColorTimeline.html">TwoColorTimeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.TwoColorTimeline.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.TwoColorTimeline.html#getCurvePercent">getCurvePercent</a></li><li data-type='method'><a href="Tiny.spine.TwoColorTimeline.html#getCurveType">getCurveType</a></li><li data-type='method'><a href="Tiny.spine.TwoColorTimeline.html#getFrameCount">getFrameCount</a></li><li data-type='method'><a href="Tiny.spine.TwoColorTimeline.html#getPropertyId">getPropertyId</a></li><li data-type='method'><a href="Tiny.spine.TwoColorTimeline.html#setCurve">setCurve</a></li><li data-type='method'><a href="Tiny.spine.TwoColorTimeline.html#setFrame">setFrame</a></li><li data-type='method'><a href="Tiny.spine.TwoColorTimeline.html#setLinear">setLinear</a></li><li data-type='method'><a href="Tiny.spine.TwoColorTimeline.html#setStepped">setStepped</a></li></ul></li><li><a href="Tiny.spine.Vector2.html">Vector2</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.Vector2.html#length">length</a></li><li data-type='method'><a href="Tiny.spine.Vector2.html#normalize">normalize</a></li><li data-type='method'><a href="Tiny.spine.Vector2.html#set">set</a></li></ul></li><li><a href="Tiny.spine.Vector3.html">Vector3</a></li><li><a href="Tiny.spine.VertexAttachment.html">VertexAttachment</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.VertexAttachment.html#computeWorldVertices">computeWorldVertices</a></li><li data-type='method'><a href="Tiny.spine.VertexAttachment.html#copyTo">copyTo</a></li></ul></li></ul><h3>Externals</h3><ul><li><a href="external-Tiny.html">Tiny</a></li></ul><h3>Namespaces</h3><ul><li><a href="Tiny.spine.html">spine</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.html#.atlasParser">atlasParser</a></li><li data-type='method'><a href="Tiny.spine.html#.imageLoaderAdapter">imageLoaderAdapter</a></li><li data-type='method'><a href="Tiny.spine.html#.staticImageLoader">staticImageLoader</a></li></ul></li></ul><h3>Interfaces</h3><ul><li><a href="Tiny.spine.AnimationStateListener.html">AnimationStateListener</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.AnimationStateListener.html#complete">complete</a></li><li data-type='method'><a href="Tiny.spine.AnimationStateListener.html#dispose">dispose</a></li><li data-type='method'><a href="Tiny.spine.AnimationStateListener.html#end">end</a></li><li data-type='method'><a href="Tiny.spine.AnimationStateListener.html#event">event</a></li><li data-type='method'><a href="Tiny.spine.AnimationStateListener.html#interrupt">interrupt</a></li><li data-type='method'><a href="Tiny.spine.AnimationStateListener.html#start">start</a></li></ul></li><li><a href="Tiny.spine.AttachmentLoader.html">AttachmentLoader</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.AttachmentLoader.html#newBoundingBoxAttachment">newBoundingBoxAttachment</a></li><li data-type='method'><a href="Tiny.spine.AttachmentLoader.html#newClippingAttachment">newClippingAttachment</a></li><li data-type='method'><a href="Tiny.spine.AttachmentLoader.html#newMeshAttachment">newMeshAttachment</a></li><li data-type='method'><a href="Tiny.spine.AttachmentLoader.html#newPathAttachment">newPathAttachment</a></li><li data-type='method'><a href="Tiny.spine.AttachmentLoader.html#newPointAttachment">newPointAttachment</a></li><li data-type='method'><a href="Tiny.spine.AttachmentLoader.html#newRegionAttachment">newRegionAttachment</a></li></ul></li><li><a href="Tiny.spine.Disposable.html">Disposable</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.Disposable.html#dispose">dispose</a></li></ul></li><li><a href="Tiny.spine.Timeline.html">Timeline</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.Timeline.html#apply">apply</a></li><li data-type='method'><a href="Tiny.spine.Timeline.html#getPropertyId">getPropertyId</a></li></ul></li><li><a href="Tiny.spine.Updatable.html">Updatable</a><ul class='methods'><li data-type='method'><a href="Tiny.spine.Updatable.html#isActive">isActive</a></li><li data-type='method'><a href="Tiny.spine.Updatable.html#update">update</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">core/PathConstraint.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { setArraySize, degRad, PI, PI2 } from './utils';
+import PathAttachment from './attachments/PathAttachment';
+import { SpacingMode, RotateMode, PositionMode } from './PathConstraintData';
+
+/**
+ * Stores the current pose for a path constraint. A path constraint adjusts the rotation, translation, and scale of the
+ * constrained bones so they follow a {@link Tiny.spine.PathAttachment}.
+ *
+ * See [Path constraints](http://esotericsoftware.com/spine-path-constraints) in the Spine User Guide.
+ *
+ * @class
+ * @memberof Tiny.spine
+ * @implements {Tiny.spine.Updatable}
+ */
+class PathConstraint {
+  constructor(data, skeleton) {
+    /**
+     * The position along the path.
+     *
+     * @type {number}
+     * @default 0
+     */
+    this.position = 0;
+    /**
+     * The spacing between bones.
+     *
+     * @type {number}
+     * @default 0
+     */
+    this.spacing = 0;
+    /**
+     * A percentage (0-1) that controls the mix between the constrained and unconstrained rotations.
+     *
+     * @type {number}
+     * @default 0
+     */
+    this.rotateMix = 0;
+    /**
+     * A percentage (0-1) that controls the mix between the constrained and unconstrained translations.
+     *
+     * @type {number}
+     * @default 0
+     */
+    this.translateMix = 0;
+    /**
+     *
+     * @type {number[]}
+     * @default []
+     */
+    this.spaces = [];
+    /**
+     *
+     * @type {number[]}
+     * @default []
+     */
+    this.positions = [];
+    /**
+     *
+     * @type {number[]}
+     * @default []
+     */
+    this.world = [];
+    /**
+     *
+     * @type {number[]}
+     * @default []
+     */
+    this.curves = [];
+    /**
+     *
+     * @type {number[]}
+     * @default []
+     */
+    this.lengths = [];
+    /**
+     *
+     * @type {number[]}
+     * @default []
+     */
+    this.segments = [];
+    /**
+     *
+     * @type {boolean}
+     * @default false
+     */
+    this.active = false;
+
+    if (data == null) {
+      throw new Error('data cannot be null.');
+    }
+    if (skeleton == null) {
+      throw new Error('skeleton cannot be null.');
+    }
+    /**
+     * The path constraint's setup pose data.
+     *
+     * @type {Tiny.spine.PathConstraintData}
+     */
+    this.data = data;
+    /**
+     * The bones that will be modified by this path constraint.
+     *
+     * @type {Tiny.spine.Bone[]}
+     */
+    this.bones = [];
+    for (let i = 0, n = data.bones.length; i &lt; n; i++) {
+      this.bones.push(skeleton.findBone(data.bones[i].name));
+    }
+    /**
+     * The slot whose path attachment will be used to constrained the bones.
+     *
+     * @type {Tiny.spine.Slot}
+     */
+    this.target = skeleton.findSlot(data.target.name);
+
+    this.position = data.position;
+    this.spacing = data.spacing;
+    this.rotateMix = data.rotateMix;
+    this.translateMix = data.translateMix;
+  }
+
+  /**
+   * @return {boolean}
+   */
+  isActive() {
+    return this.active;
+  }
+
+  /**
+   * Applies the constraint to the constrained bones.
+   */
+  apply() {
+    this.update();
+  }
+
+  /**
+   *
+   */
+  update() {
+    const attachment = this.target.getAttachment();
+
+    if (!(attachment instanceof PathAttachment)) {
+      return;
+    }
+
+    const rotateMix = this.rotateMix;
+    const translateMix = this.translateMix;
+    const translate = translateMix > 0;
+    const rotate = rotateMix > 0;
+
+    if (!translate &amp;&amp; !rotate) {
+      return;
+    }
+
+    const data = this.data;
+    const spacingMode = data.spacingMode;
+    const lengthSpacing = spacingMode === SpacingMode.Length;
+    const rotateMode = data.rotateMode;
+    const tangents = rotateMode === RotateMode.Tangent;
+    const scale = rotateMode === RotateMode.ChainScale;
+    const boneCount = this.bones.length;
+    const spacesCount = tangents ? boneCount : boneCount + 1;
+    const bones = this.bones;
+    const spaces = setArraySize(this.spaces, spacesCount);
+    let lengths = null;
+    const spacing = this.spacing;
+
+    if (scale || lengthSpacing) {
+      if (scale) {
+        lengths = setArraySize(this.lengths, boneCount);
+      }
+      for (let i = 0, n = spacesCount - 1; i &lt; n;) {
+        const bone = bones[i];
+        const setupLength = bone.data.length;
+
+        if (setupLength &lt; PathConstraint.epsilon) {
+          if (scale) {
+            lengths[i] = 0;
+          }
+          spaces[++i] = 0;
+        } else {
+          const x = setupLength * bone.matrix.a;
+          const y = setupLength * bone.matrix.b;
+          const length = Math.sqrt(x * x + y * y);
+
+          if (scale) {
+            lengths[i] = length;
+          }
+          spaces[++i] = (lengthSpacing ? setupLength + spacing : spacing) * length / setupLength;
+        }
+      }
+    } else {
+      for (let i = 1; i &lt; spacesCount; i++) {
+        spaces[i] = spacing;
+      }
+    }
+
+    const positions = this.computeWorldPositions(
+      attachment,
+      spacesCount,
+      tangents,
+      data.positionMode === PositionMode.Percent,
+      spacingMode === SpacingMode.Percent
+    );
+    let boneX = positions[0];
+    let boneY = positions[1];
+    let offsetRotation = data.offsetRotation;
+    let tip = false;
+
+    if (offsetRotation === 0) {
+      tip = rotateMode === RotateMode.Chain;
+    } else {
+      tip = false;
+
+      const p = this.target.bone.matrix;
+
+      offsetRotation *= p.a * p.d - p.b * p.c > 0 ? degRad : -degRad;
+    }
+    for (let i = 0, p = 3; i &lt; boneCount; i++, p += 3) {
+      const bone = bones[i];
+      const mat = bone.matrix;
+
+      mat.tx += (boneX - mat.tx) * translateMix;
+      mat.ty += (boneY - mat.ty) * translateMix;
+
+      const x = positions[p];
+      const y = positions[p + 1];
+      const dx = x - boneX;
+      const dy = y - boneY;
+
+      if (scale) {
+        const length = lengths[i];
+
+        if (length !== 0) {
+          const s = (Math.sqrt(dx * dx + dy * dy) / length - 1) * rotateMix + 1;
+
+          mat.a *= s;
+          mat.b *= s;
+        }
+      }
+      boneX = x;
+      boneY = y;
+      if (rotate) {
+        const a = mat.a;
+        const b = mat.c;
+        const c = mat.b;
+        const d = mat.d;
+        let r = 0;
+        let cos = 0;
+        let sin = 0;
+
+        if (tangents) {
+          r = positions[p - 1];
+        } else if (spaces[i + 1] === 0) {
+          r = positions[p + 2];
+        } else {
+          r = Math.atan2(dy, dx);
+        }
+        r -= Math.atan2(c, a);
+        if (tip) {
+          cos = Math.cos(r);
+          sin = Math.sin(r);
+
+          const length = bone.data.length;
+
+          boneX += (length * (cos * a - sin * c) - dx) * rotateMix;
+          boneY += (length * (sin * a + cos * c) - dy) * rotateMix;
+        } else {
+          r += offsetRotation;
+        }
+        if (r > PI) {
+          r -= PI2;
+        } else if (r &lt; -PI) {
+          r += PI2;
+        }
+        r *= rotateMix;
+        cos = Math.cos(r);
+        sin = Math.sin(r);
+        mat.a = cos * a - sin * c;
+        mat.c = cos * b - sin * d;
+        mat.b = sin * a + cos * c;
+        mat.d = sin * b + cos * d;
+      }
+      bone.appliedValid = false;
+    }
+  }
+
+  /**
+   *
+   * @param {Tiny.spine.PathAttachment} path
+   * @param {number} spacesCount
+   * @param {boolean} tangents
+   * @param {boolean} percentPosition
+   * @param {boolean} percentSpacing
+   */
+  computeWorldPositions(path, spacesCount, tangents, percentPosition, percentSpacing) {
+    let target = this.target;
+    let position = this.position;
+    let spaces = this.spaces;
+    let out = setArraySize(this.positions, spacesCount * 3 + 2);
+    let world = null;
+    let closed = path.closed;
+    let verticesLength = path.worldVerticesLength;
+    let curveCount = verticesLength / 6;
+    let prevCurve = PathConstraint.NONE;
+
+    if (!path.constantSpeed) {
+      const lengths = path.lengths;
+
+      curveCount -= closed ? 1 : 2;
+
+      const pathLength = lengths[curveCount];
+
+      if (percentPosition) {
+        position *= pathLength;
+      }
+      if (percentSpacing) {
+        for (let i = 0; i &lt; spacesCount; i++) {
+          spaces[i] *= pathLength;
+        }
+      }
+      world = setArraySize(this.world, 8);
+      for (let i = 0, o = 0, curve = 0; i &lt; spacesCount; i++, o += 3) {
+        const space = spaces[i];
+
+        position += space;
+
+        let p = position;
+
+        if (closed) {
+          p %= pathLength;
+          if (p &lt; 0) {
+            p += pathLength;
+          }
+          curve = 0;
+        } else if (p &lt; 0) {
+          if (prevCurve !== PathConstraint.BEFORE) {
+            prevCurve = PathConstraint.BEFORE;
+            path.computeWorldVertices(target, 2, 4, world, 0, 2);
+          }
+          this.addBeforePosition(p, world, 0, out, o);
+          continue;
+        } else if (p > pathLength) {
+          if (prevCurve !== PathConstraint.AFTER) {
+            prevCurve = PathConstraint.AFTER;
+            path.computeWorldVertices(target, verticesLength - 6, 4, world, 0, 2);
+          }
+          this.addAfterPosition(p - pathLength, world, 0, out, o);
+          continue;
+        }
+
+        // Determine curve containing position.
+        for (;; curve++) {
+          const length = lengths[curve];
+
+          if (p > length) {
+            continue;
+          }
+          if (curve === 0) {
+            p /= length;
+          } else {
+            const prev = lengths[curve - 1];
+
+            p = (p - prev) / (length - prev);
+          }
+          break;
+        }
+        if (curve !== prevCurve) {
+          prevCurve = curve;
+          if (closed &amp;&amp; curve === curveCount) {
+            path.computeWorldVertices(target, verticesLength - 4, 4, world, 0, 2);
+            path.computeWorldVertices(target, 0, 4, world, 4, 2);
+          } else {
+            path.computeWorldVertices(target, curve * 6 + 2, 8, world, 0, 2);
+          }
+        }
+        this.addCurvePosition(
+          p,
+          world[0],
+          world[1],
+          world[2],
+          world[3],
+          world[4],
+          world[5],
+          world[6],
+          world[7],
+          out,
+          o,
+          tangents || (i > 0 &amp;&amp; space === 0)
+        );
+      }
+      return out;
+    }
+
+    // World vertices.
+    if (closed) {
+      verticesLength += 2;
+      world = setArraySize(this.world, verticesLength);
+      path.computeWorldVertices(target, 2, verticesLength - 4, world, 0, 2);
+      path.computeWorldVertices(target, 0, 2, world, verticesLength - 4, 2);
+      world[verticesLength - 2] = world[0];
+      world[verticesLength - 1] = world[1];
+    } else {
+      curveCount--;
+      verticesLength -= 4;
+      world = setArraySize(this.world, verticesLength);
+      path.computeWorldVertices(target, 2, verticesLength, world, 0, 2);
+    }
+
+    // Curve lengths.
+    const curves = setArraySize(this.curves, curveCount);
+    let pathLength = 0;
+    let x1 = world[0];
+    let y1 = world[1];
+    let cx1 = 0;
+    let cy1 = 0;
+    let cx2 = 0;
+    let cy2 = 0;
+    let x2 = 0;
+    let y2 = 0;
+    let tmpx = 0;
+    let tmpy = 0;
+    let dddfx = 0;
+    let dddfy = 0;
+    let ddfx = 0;
+    let ddfy = 0;
+    let dfx = 0;
+    let dfy = 0;
+
+    for (let i = 0, w = 2; i &lt; curveCount; i++, w += 6) {
+      cx1 = world[w];
+      cy1 = world[w + 1];
+      cx2 = world[w + 2];
+      cy2 = world[w + 3];
+      x2 = world[w + 4];
+      y2 = world[w + 5];
+      tmpx = (x1 - cx1 * 2 + cx2) * 0.1875;
+      tmpy = (y1 - cy1 * 2 + cy2) * 0.1875;
+      dddfx = ((cx1 - cx2) * 3 - x1 + x2) * 0.09375;
+      dddfy = ((cy1 - cy2) * 3 - y1 + y2) * 0.09375;
+      ddfx = tmpx * 2 + dddfx;
+      ddfy = tmpy * 2 + dddfy;
+      dfx = (cx1 - x1) * 0.75 + tmpx + dddfx * 0.16666667;
+      dfy = (cy1 - y1) * 0.75 + tmpy + dddfy * 0.16666667;
+      pathLength += Math.sqrt(dfx * dfx + dfy * dfy);
+      dfx += ddfx;
+      dfy += ddfy;
+      ddfx += dddfx;
+      ddfy += dddfy;
+      pathLength += Math.sqrt(dfx * dfx + dfy * dfy);
+      dfx += ddfx;
+      dfy += ddfy;
+      pathLength += Math.sqrt(dfx * dfx + dfy * dfy);
+      dfx += ddfx + dddfx;
+      dfy += ddfy + dddfy;
+      pathLength += Math.sqrt(dfx * dfx + dfy * dfy);
+      curves[i] = pathLength;
+      x1 = x2;
+      y1 = y2;
+    }
+    if (percentPosition) {
+      position *= pathLength;
+    }
+    if (percentSpacing) {
+      for (let i = 0; i &lt; spacesCount; i++) {
+        spaces[i] *= pathLength;
+      }
+    }
+
+    const segments = this.segments;
+    let curveLength = 0;
+
+    for (let i = 0, o = 0, curve = 0, segment = 0; i &lt; spacesCount; i++, o += 3) {
+      const space = spaces[i];
+
+      position += space;
+
+      let p = position;
+
+      if (closed) {
+        p %= pathLength;
+        if (p &lt; 0) {
+          p += pathLength;
+        }
+        curve = 0;
+      } else if (p &lt; 0) {
+        this.addBeforePosition(p, world, 0, out, o);
+        continue;
+      } else if (p > pathLength) {
+        this.addAfterPosition(p - pathLength, world, verticesLength - 4, out, o);
+        continue;
+      }
+
+      // Determine curve containing position.
+      for (;; curve++) {
+        const length = curves[curve];
+
+        if (p > length) {
+          continue;
+        }
+        if (curve === 0) {
+          p /= length;
+        } else {
+          const prev = curves[curve - 1];
+
+          p = (p - prev) / (length - prev);
+        }
+        break;
+      }
+
+      // Curve segment lengths.
+      if (curve !== prevCurve) {
+        prevCurve = curve;
+
+        let ii = curve * 6;
+
+        x1 = world[ii];
+        y1 = world[ii + 1];
+        cx1 = world[ii + 2];
+        cy1 = world[ii + 3];
+        cx2 = world[ii + 4];
+        cy2 = world[ii + 5];
+        x2 = world[ii + 6];
+        y2 = world[ii + 7];
+        tmpx = (x1 - cx1 * 2 + cx2) * 0.03;
+        tmpy = (y1 - cy1 * 2 + cy2) * 0.03;
+        dddfx = ((cx1 - cx2) * 3 - x1 + x2) * 0.006;
+        dddfy = ((cy1 - cy2) * 3 - y1 + y2) * 0.006;
+        ddfx = tmpx * 2 + dddfx;
+        ddfy = tmpy * 2 + dddfy;
+        dfx = (cx1 - x1) * 0.3 + tmpx + dddfx * 0.16666667;
+        dfy = (cy1 - y1) * 0.3 + tmpy + dddfy * 0.16666667;
+        curveLength = Math.sqrt(dfx * dfx + dfy * dfy);
+        segments[0] = curveLength;
+
+        for (ii = 1; ii &lt; 8; ii++) {
+          dfx += ddfx;
+          dfy += ddfy;
+          ddfx += dddfx;
+          ddfy += dddfy;
+          curveLength += Math.sqrt(dfx * dfx + dfy * dfy);
+          segments[ii] = curveLength;
+        }
+        dfx += ddfx;
+        dfy += ddfy;
+        curveLength += Math.sqrt(dfx * dfx + dfy * dfy);
+        segments[8] = curveLength;
+        dfx += ddfx + dddfx;
+        dfy += ddfy + dddfy;
+        curveLength += Math.sqrt(dfx * dfx + dfy * dfy);
+        segments[9] = curveLength;
+        segment = 0;
+      }
+
+      // Weight by segment length.
+      p *= curveLength;
+      for (;; segment++) {
+        const length = segments[segment];
+
+        if (p > length) {
+          continue;
+        }
+        if (segment === 0) {
+          p /= length;
+        } else {
+          const prev = segments[segment - 1];
+
+          p = segment + (p - prev) / (length - prev);
+        }
+        break;
+      }
+      this.addCurvePosition(p * 0.1, x1, y1, cx1, cy1, cx2, cy2, x2, y2, out, o, tangents || (i > 0 &amp;&amp; space === 0));
+    }
+    return out;
+  }
+
+  /**
+   *
+   * @param {number} p
+   * @param {number[]} temp
+   * @param {number} i
+   * @param {number[]} out
+   * @param {number} o
+   */
+  addBeforePosition(p, temp, i, out, o) {
+    const x1 = temp[i];
+    const y1 = temp[i + 1];
+    const dx = temp[i + 2] - x1;
+    const dy = temp[i + 3] - y1;
+    const r = Math.atan2(dy, dx);
+
+    out[o] = x1 + p * Math.cos(r);
+    out[o + 1] = y1 + p * Math.sin(r);
+    out[o + 2] = r;
+  }
+
+  /**
+   *
+   * @param {number} p
+   * @param {number[]} temp
+   * @param {number} i
+   * @param {number[]} out
+   * @param {number} o
+   */
+  addAfterPosition(p, temp, i, out, o) {
+    const x1 = temp[i + 2];
+    const y1 = temp[i + 3];
+    const dx = x1 - temp[i];
+    const dy = y1 - temp[i + 1];
+    const r = Math.atan2(dy, dx);
+
+    out[o] = x1 + p * Math.cos(r);
+    out[o + 1] = y1 + p * Math.sin(r);
+    out[o + 2] = r;
+  }
+
+  /**
+   *
+   * @param {number} p
+   * @param {number} x1
+   * @param {number} y1
+   * @param {number} cx1
+   * @param {number} cy1
+   * @param {number} cx2
+   * @param {number} cy2
+   * @param {number} x2
+   * @param {number} y2
+   * @param {number} out
+   * @param {number} o
+   * @param {number} tangents
+   */
+  addCurvePosition(p, x1, y1, cx1, cy1, cx2, cy2, x2, y2, out, o, tangents) {
+    if (p === 0 || isNaN(p)) {
+      p = 0.0001;
+    }
+
+    const tt = p * p;
+    const ttt = tt * p;
+    const u = 1 - p;
+    const uu = u * u;
+    const uuu = uu * u;
+    const ut = u * p;
+    const ut3 = ut * 3;
+    const uut3 = u * ut3;
+    const utt3 = ut3 * p;
+    const x = x1 * uuu + cx1 * uut3 + cx2 * utt3 + x2 * ttt;
+    const y = y1 * uuu + cy1 * uut3 + cy2 * utt3 + y2 * ttt;
+
+    out[o] = x;
+    out[o + 1] = y;
+    if (tangents) {
+      out[o + 2] = Math.atan2(y - (y1 * uu + cy1 * ut * 2 + cy2 * tt), x - (x1 * uu + cx1 * ut * 2 + cx2 * tt));
+    }
+  }
+}
+
+PathConstraint.NONE = -1;
+PathConstraint.BEFORE = -2;
+PathConstraint.AFTER = -3;
+PathConstraint.epsilon = 0.00001;
+
+export default PathConstraint;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jul 27 2021 16:07:30 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

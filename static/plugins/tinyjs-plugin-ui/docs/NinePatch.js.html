@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>NinePatch.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Tiny.ui.Alert.html">Alert</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Alert.html#alert">alert</a></li></ul></li><li><a href="Tiny.ui.Button.html">Button</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Button.html#updatePosition">updatePosition</a></li></ul></li><li><a href="Tiny.ui.DOM.html">DOM</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.DOM.html#updateHTML">updateHTML</a></li></ul></li><li><a href="Tiny.ui.ImageNumber.html">ImageNumber</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.ImageNumber.html#create">create</a></li><li data-type='method'><a href="Tiny.ui.ImageNumber.html#update">update</a></li></ul></li><li><a href="Tiny.ui.InlineItems.html">InlineItems</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.InlineItems.html#deleteItem">deleteItem</a></li><li data-type='method'><a href="Tiny.ui.InlineItems.html#layout">layout</a></li><li data-type='method'><a href="Tiny.ui.InlineItems.html#spliceItems">spliceItems</a></li></ul></li><li><a href="Tiny.ui.InputBase.html">InputBase</a></li><li><a href="Tiny.ui.Label.html">Label</a></li><li><a href="Tiny.ui.NinePatch.html">NinePatch</a></li><li><a href="Tiny.ui.TiledText.html">TiledText</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.TiledText.html#create">create</a></li></ul></li><li><a href="Tiny.ui.Toast.html">Toast</a><ul class='methods'><li data-type='method'><a href="Tiny.ui.Toast.html#show">show</a></li></ul></li><li><a href="Tiny.ui.UIBase.html">UIBase</a></li><li><a href="TIny.ui.UISettings.html">UISettings</a></li></ul><h3>Externals</h3><ul><li><a href="external-Tiny.html">Tiny</a></li></ul><h3>Namespaces</h3><ul><li><a href="Tiny.ui.html">ui</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">NinePatch.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import UIBase from './UIBase';
+
+/**
+ * 九宫格
+ *
+ * @description
+ *
+ * &lt;pre>
+ * -----------—
+ * | 1 | 2 | 3 |
+ * -------------
+ * | 4 | 5 | 6 |
+ * -------------
+ * | 7 | 8 | 9 |
+ * -------------
+ * scale9Grid=[a, b, c, d] 表示：
+ * - a：区域1 的宽度值
+ * - b：区域1 的高度值
+ * - c：区域2 的宽度值，取值范围是 [宽度 &lt; 源图片宽 ? 源图片宽 - 宽度 : 1, 源图片宽 - a]
+ * - d：区域4 的高度值，取值范围是 [高度 &lt; 源图片高 ? 源图片高 - 高度 : 1, 源图片高 - b]
+ * &lt;/pre>
+ *
+ * @example
+ * var np = new Tiny.ui.NinePatch(
+ *  Tiny.Texture.fromImage('https://gw.alipayobjects.com/zos/rmsportal/ipdnmCVbXeVBPprGCYlW.png'),
+ *  200,
+ *  300,
+ *  [30, 30, 100, 100]
+ * );
+ * np.setPosition(10, 10);
+ *
+ * @class
+ * @extends Tiny.ui.UIBase
+ * @memberof Tiny.ui
+ * @version 0.1.0
+ */
+class NinePatch extends UIBase {
+  /**
+   * @constructor
+   * @param {Tiny.BaseTexture} texture - 九宫格纹理
+   * @param {number} width - 宽度
+   * @param {number} height - 高度
+   * @param {Array&lt;Number>} scale9Grid - 九宫格定义
+   * @param {Array&lt;Number>} [overlapPadding=1] - Canvas 渲染模式下可能会有缝隙，用这个来修复，默认是1
+   */
+  constructor(texture, width, height, scale9Grid, overlapPadding = 1) {
+    super();
+    this._gridTexture = texture;
+
+    this._debugDraw = false;
+
+    /**
+     * 存储九宫格纹理
+     *
+     * @private
+     */
+    this._textures = [];
+
+    /**
+     * 存储九宫格 Sprite 对象
+     *
+     * @private
+     */
+    this._gridSprites = [];
+
+    /**
+     * 真实宽度
+     *
+     * @private
+     */
+    this._targetWidth = width || 0;
+
+    /**
+     * 真实高度
+     *
+     * @private
+     */
+    this._targetHeight = height || 0;
+
+    /**
+     * 素材的原始尺寸
+     * @private
+     */
+    this._textureOrigFrame = new Tiny.Rectangle(0, 0, this._gridTexture.width, this._gridTexture.height);
+
+    /**
+     * 九宫格设置
+     *
+     * @private
+     */
+    this._scale9Grid = null;
+
+    this._overlapPadding = overlapPadding;
+
+    this._inited = false;
+
+    this.scale9Grid = scale9Grid;
+
+    if (this._gridTexture.baseTexture.hasLoaded) {
+      this._onGridTextureUpdate();
+    } else {
+      this._gridTexture.once('update', this._onGridTextureUpdate, this);
+    }
+  }
+
+  _onGridTextureUpdate() {
+    this._init();
+    this._update();
+  }
+
+  _init() {
+    if (this._inited) return;
+    this._inited = true;
+    for (let i = 0; i &lt; 9; i++) {
+      const t = new Tiny.Texture(
+        this._gridTexture,
+        this._gridTexture.frame,
+        this._gridTexture.orig,
+        null,
+        0
+      );
+      this._textures.push(t);
+      const child = new Tiny.Sprite(t);
+      child.visible = false;
+      this._gridSprites.push(child);
+      this.addChild(child);
+    }
+  }
+
+  /**
+   * @name Tiny.ui.NinePatch#debug
+   * @property {boolean} debug - 是否开启调试模式 默认false
+   */
+  get debug() {
+    return this._debugDraw;
+  }
+  set debug(value) {
+    this._debugDraw = value;
+    this._update();
+  }
+
+  /**
+   * @name Tiny.ui.NinePatch#scale9Grid
+   * @property {string | Array} scale9Grid - 九宫格数据 "30,10,10,5" 或者 [30,10,10,5]
+   */
+  get scale9Grid() {
+    return this._scale9Grid;
+  }
+  set scale9Grid(value) {
+    if (value) {
+      let newGrid = typeof value === 'string' ? value.split(',') : value;
+      if (newGrid.length !== 4) {
+        console.error('error scale9Grid format', value);
+        return;
+      }
+      newGrid = newGrid.map((e) => parseFloat(e));
+      this._scale9Grid = newGrid;
+    } else {
+      this._scale9Grid = [0, 0, 0, 0];
+    }
+    this._update();
+  }
+
+  /**
+   * @name Tiny.ui.NinePatch#width
+   * @property {number} width - 宽度
+   */
+  get width() {
+    return this._targetWidth || this._gridTexture.width;
+  }
+  set width(value) {
+    this._targetWidth = value;
+    this._update();
+  }
+
+  /**
+   * @name Tiny.ui.NinePatch#height
+   * @property {number} height - 高度
+   */
+  get height() {
+    return this._targetHeight || this._gridTexture.height;
+  }
+  set height(value) {
+    this._targetHeight = value;
+    this._update();
+  }
+
+  /**
+   * @name Tiny.ui.NinePatch#overlapPadding
+   * @property {number} overlapPadding - 九宫格之间的重合度，Canvas 渲染模式下可能会有缝隙，用这个来修复，默认是1
+   */
+  get overlapPadding() {
+    return this._overlapPadding;
+  }
+  set overlapPadding(value) {
+    this._overlapPadding = +value || 0;
+    this._update();
+  }
+
+  /**
+   * 改变尺寸
+   * @private
+   * @param {number} width - 宽度
+   * @param {number} height - 高度
+   */
+  resize(width, height) {
+    this._targetWidth = width;
+    this._targetHeight = height;
+    this._update(width, height);
+  }
+
+  /**
+   * 定位到正确的位置，tileset纹理
+   * @private
+   * @param {number} index
+   * @param {number} x
+   * @param {number} y
+   * @return {number[]}
+   */
+  offsetFrame(index, x, y) {
+    const frameX = this._textures[index].frame.x || 0;
+    const frameY = this._textures[index].frame.y || 0;
+    const offsetX = frameX + x;
+    const offsetY = frameY + y;
+    return [offsetX, offsetY];
+  }
+
+  /**
+   * 更新
+   * @private
+   * @param {number} [width=null]
+   * @param {number} [height=null]
+   */
+  _update() {
+    if (!this._gridTexture) return;
+    if (!this._gridTexture.baseTexture.hasLoaded) return;
+    if (!this._inited) return;
+
+    // 容错
+    if (this.width &lt; this._gridTexture.width || this.height &lt; this._gridTexture.height) {
+      console.warn('九宫格尺寸设置异常，尺寸不能小于素材尺寸');
+    }
+
+    const realWidth = Math.max(this.width, this._gridTexture.width);
+    const realHeight = Math.max(this.height, this._gridTexture.height);
+
+    const scale9Grid = this._scale9Grid;
+    const w1 = scale9Grid[0];
+    const w2 = Math.max(0, scale9Grid[2]);
+    const w3 = Math.max(0, this._gridTexture.width - w1 - w2);
+
+    const h1 = scale9Grid[1];
+    const h2 = Math.max(0, scale9Grid[3]);
+    const h3 = Math.max(0, this._gridTexture.height - h1 - h2);
+
+    const wArr = [w1, w2, w3];
+    const xArr = [0, w1, w1 + w2];
+
+    const hArr = [h1, h2, h3];
+    const yArr = [0, h1, h1 + h2];
+
+    const overlapPadding = this.overlapPadding;
+    for (let row = 0; row &lt; 3; row++) {
+      for (let col = 0; col &lt; 3; col++) {
+        const i = row * 3 + col;
+        const child = this._gridSprites[i];
+        const frame = new Tiny.Rectangle(...this.offsetFrame(i, xArr[col], yArr[row]), wArr[col], hArr[row]);
+        if (frame.width > 0 &amp;&amp; frame.height > 0) {
+          const w = (col === 0 || col === 2) ? wArr[col] : Math.max(0, realWidth - wArr[0] - wArr[2]);
+          const h = (row === 0 || row === 2) ? hArr[row] : Math.max(0, realHeight - hArr[0] - hArr[2]);
+          const x = col === 0 ? 0 : col === 1 ? wArr[0] : Math.max(0, realWidth - wArr[2]);
+          const y = row === 0 ? 0 : row === 1 ? hArr[0] : Math.max(0, realHeight - hArr[2]);
+          if (w > 0 &amp;&amp; h > 0) {
+            this._textures[i].frame = frame;
+            child.anchor.set(0, 0);
+            child.x = x - col * overlapPadding;
+            child.y = y - row * overlapPadding;
+            child.alpha = this._debugDraw ? (0.1 + i * 0.05) : 1;
+            child.width = w;
+            child.height = h;
+            child.visible = true;
+          } else {
+            child.visible = false;
+          }
+        } else {
+          child.visible = false;
+        }
+      }
+    }
+    this.emit('resize');
+  }
+}
+
+export default NinePatch;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jul 27 2021 16:05:17 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TinyFactory - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Tiny.DragonBones.TinyArmatureDisplay.html">TinyArmatureDisplay</a><ul class='methods'><li data-type='method'><a href="Tiny.DragonBones.TinyArmatureDisplay.html#dispose">dispose</a></li><li data-type='method'><a href="Tiny.DragonBones.TinyArmatureDisplay.html#play">play</a></li></ul></li><li><a href="Tiny.DragonBones.TinyFactory.html">TinyFactory</a><ul class='methods'><li data-type='method'><a href="Tiny.DragonBones.TinyFactory.html#buildArmatureDisplay">buildArmatureDisplay</a></li><li data-type='method'><a href="Tiny.DragonBones.TinyFactory.html#getTextureDisplay">getTextureDisplay</a></li></ul></li><li><a href="Tiny.DragonBones.TinySlot.html">TinySlot</a></li><li><a href="Tiny.DragonBones.TinyTextureAtlasData.html">TinyTextureAtlasData</a><ul class='methods'><li data-type='method'><a href="Tiny.DragonBones.TinyTextureAtlasData.html#.toString">toString</a></li><li data-type='method'><a href="Tiny.DragonBones.TinyTextureAtlasData.html#generateTexture">generateTexture</a></li></ul></li></ul><h3>Externals</h3><ul><li><a href="external-dragonBones.html">dragonBones</a></li><li><a href="external-Tiny.html">Tiny</a></li></ul><h3>Namespaces</h3><ul><li><a href="Tiny.DragonBones.html">DragonBones</a><ul class='methods'><li data-type='method'><a href="Tiny.DragonBones.html#.addDragonBonesData">addDragonBonesData</a></li><li data-type='method'><a href="Tiny.DragonBones.html#.addTextureAtlasData">addTextureAtlasData</a></li><li data-type='method'><a href="Tiny.DragonBones.html#.buildArmatureDisplay">buildArmatureDisplay</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">TinyFactory</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+            <span class="ancestors"><a href="Tiny.DragonBones.html">.DragonBones</a>.</span>
+        
+        TinyFactory
+        </h2>
+        
+            <div class="class-description">TinyFactory</div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="TinyFactory"><span class="type-signature"></span>new TinyFactory<span class="signature">(dataParser)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TinyFactory.js.html">TinyFactory.js</a>, <a href="TinyFactory.js.html#line24">line 24</a>
+    </li></ul></dd>
+    
+
+    
+    <dt class="tag-version">Version:</dt>
+    <dd class="tag-version"><ul class="dummy"><li>DragonBones 3.0</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    创建一个工厂。 (通常只需要一个全局工厂实例)
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dataParser</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">dragonBones.DataParser</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>null</code>
+                
+                </td>
+            
+
+            <td class="description last">龙骨数据解析器，如果不设置，则使用默认解析器。</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>dragonBones.BaseFactory</li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="clock"><span class="type-signature"></span>clock<span class="type-signature"> :dragonBones.WorldClock</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TinyFactory.js.html">TinyFactory.js</a>, <a href="TinyFactory.js.html#line66">line 66</a>
+    </li></ul></dd>
+    
+
+    
+    <dt class="tag-version">Version:</dt>
+    <dd class="tag-version"><ul class="dummy"><li>DragonBones 5.0</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    一个可以直接使用的全局 WorldClock 实例.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">dragonBones.WorldClock</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="eventManater"><span class="type-signature"></span>eventManater<span class="type-signature"> :<a href="Tiny.DragonBones.TinyArmatureDisplay.html">Tiny.DragonBones.TinyArmatureDisplay</a></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TinyFactory.js.html">TinyFactory.js</a>, <a href="TinyFactory.js.html#line251">line 251</a>
+    </li></ul></dd>
+    
+
+    
+    <dt class="tag-version">Version:</dt>
+    <dd class="tag-version"><ul class="dummy"><li>DragonBones 4.5</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    获取全局声音事件管理器。
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="Tiny.DragonBones.TinyArmatureDisplay.html">Tiny.DragonBones.TinyArmatureDisplay</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="factory"><span class="type-signature"></span>factory<span class="type-signature"> :<a href="Tiny.DragonBones.TinyFactory.html">Tiny.DragonBones.TinyFactory</a></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TinyFactory.js.html">TinyFactory.js</a>, <a href="TinyFactory.js.html#line52">line 52</a>
+    </li></ul></dd>
+    
+
+    
+    <dt class="tag-version">Version:</dt>
+    <dd class="tag-version"><ul class="dummy"><li>DragonBones 4.7</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    一个可以直接使用的全局工厂实例。
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="Tiny.DragonBones.TinyFactory.html">Tiny.DragonBones.TinyFactory</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="buildArmatureDisplay"><span class="type-signature"></span>buildArmatureDisplay<span class="signature">(armatureName, dragonBonesName, skinName, textureAtlasName)</span><span class="type-signature"> &rarr; {<a href="TinyArmatureDisplay.html">TinyArmatureDisplay</a>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TinyFactory.js.html">TinyFactory.js</a>, <a href="TinyFactory.js.html#line194">line 194</a>
+    </li></ul></dd>
+    
+
+    
+    <dt class="tag-version">Version:</dt>
+    <dd class="tag-version"><ul class="dummy"><li>DragonBones 4.5</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="TinyArmatureDisplay.html">TinyArmatureDisplay</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    创建一个指定名称的骨架，并使用骨架的显示容器来更新骨架动画。
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>armatureName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">骨架名称。</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dragonBonesName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">龙骨数据名称，如果未设置，将检索所有的龙骨数据，如果多个数据中包含同名的骨架数据，可能无法创建出准确的骨架。</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>skinName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">皮肤名称，如果未设置，则使用默认皮肤。</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>textureAtlasName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">贴图集数据名称，如果未设置，则使用龙骨数据。</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    骨架的显示容器。
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="TinyArmatureDisplay.html">TinyArmatureDisplay</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getTextureDisplay"><span class="type-signature"></span>getTextureDisplay<span class="signature">(textureName, dragonBonesName)</span><span class="type-signature"> &rarr; {Tiny.Sprite}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TinyFactory.js.html">TinyFactory.js</a>, <a href="TinyFactory.js.html#line219">line 219</a>
+    </li></ul></dd>
+    
+
+    
+    <dt class="tag-version">Version:</dt>
+    <dd class="tag-version"><ul class="dummy"><li>DragonBones 3.0</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    获取带有指定贴图的显示对象。
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>textureName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">指定的贴图名称。</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dragonBonesName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">指定的龙骨数据名称，如果未设置，将检索所有的龙骨数据。</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Tiny.Sprite</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jul 27 2021 16:20:03 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

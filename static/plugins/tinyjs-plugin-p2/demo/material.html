@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>材质</title>
+  <meta charset="utf-8">
+  <!-- tiny 基础库 -->
+  <script src="https://gw.alipayobjects.com/as/g/tiny/tiny/1.1.5/tiny.js"></script>
+  <script src="../dist/index.debug.js"></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2,minimum-scale=1,user-scalable=1">
+  <style type="text/css">
+    body,
+    html,
+    canvas {
+      padding: 0;
+      margin: 0;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    var config = {
+      showFPS: true, // 显示帧频
+      dpi: 1, // 分辨率
+      width: 320,
+      height: 568,
+      fixSize: true,
+      renderOptions: {
+        backgroundColor: 0x2a3145 // 画布背景色
+      }
+    };
+
+    var app = new Tiny.Application(config);
+    Tiny.Physics.P2.startSystem(app, {
+      gravity: [0, 9.82]
+    });
+
+    //  设置回弹系数 增加小人落到地上的回跳效果
+    app.physics.p2.restitution = 0.3;
+
+    init();
+
+    function createBox(app, width, height, color) {
+      let graphics = new Tiny.Graphics();
+      graphics.beginFill(color);
+      graphics.drawRect(0, 0, width, height);
+      graphics.bounds = new Tiny.Rectangle(0, 0, width, height);
+      var rt = Tiny.RenderTexture.create(width, height);
+      app.renderer.render(graphics, rt);
+      let sprite = new Tiny.Sprite(rt);
+      return sprite;
+    }
+
+    function createCircle(app, radius, color) {
+      let graphics = new Tiny.Graphics();
+      graphics.beginFill(color);
+      graphics.arc(0, 0, radius);
+      graphics.bounds = new Tiny.Rectangle(0, 0, radius * 2, radius * 2);
+      var rt = Tiny.RenderTexture.create(radius * 2, radius * 2);
+      app.renderer.render(graphics, rt);
+      let sprite = new Tiny.Sprite(rt);
+      return sprite;
+    }
+
+
+    function init() {
+
+      container = new Tiny.Container();
+
+      var looptimes = 6;
+
+      function getColor() {
+        return 0x1000000 + Math.random() * 0x1000000;
+      }
+
+      var spriteMaterial = app.physics.p2.createMaterial('spriteMaterial');
+      var wallMaterial = app.physics.p2.createMaterial('wallMaterial');
+
+      var timer = setInterval(function () {
+        var sprite = createBox(app, 40, 40, getColor());
+        sprite.position.x = config.width / 2 + 30;
+        sprite.position.y = 100;
+
+        app.physics.p2.enable(sprite, true);
+        sprite.body.mass = 1;
+
+        sprite.body.setMaterial(spriteMaterial);
+
+        container.addChild(sprite);
+
+        if (--looptimes <= 0) {
+          clearInterval(timer);
+        }
+      }, 1000);
+
+      app.physics.p2.setWallMaterial(wallMaterial, false, false, false, true);
+
+      var groundPlayerCM = app.physics.p2.createContactMaterial(spriteMaterial, wallMaterial, { friction: 0.6 });
+      var spriteCM = app.physics.p2.createContactMaterial(spriteMaterial, spriteMaterial, { friction: 0 });
+
+      staticBox = createCircle(app, 50, 0xffffff);
+      staticBox.position.x = config.width / 2;
+      staticBox.position.y = 300;
+      app.physics.p2.enable(staticBox, true);
+      staticBox.body.setCircle(25);
+
+      staticBox.body.static = true;
+
+      container.addChild(staticBox);
+      app.run(container);
+    }
+  </script>
+</body>
+
+</html>
